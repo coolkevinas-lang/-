@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>科科💖紫荊甜蜜小天地</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<meta name="theme-color" content="#ff9abf" />
+<style>
+  :root{ --rose:#ff79a8; --rose-2:#ffe0ec; --sky:#7bb2ff; --sky-2:#dfeaff; --ink:#1f2937; --card:#ffffff; --muted:#6b7280; --ring:#93c5fd; --shadow:0 16px 40px rgba(0,0,0,.10); --me:#ffffff; --you-start:#fff0f5; --you-end:#ffeaf1; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Noto Sans, Arial; color:var(--ink); display:flex; flex-direction:column; align-items:center; overflow-x:hidden;
+    background: radial-gradient(1200px 760px at 8% -8%, var(--rose-2), transparent), radial-gradient(1000px 640px at 92% 8%, var(--sky-2), transparent), linear-gradient(165deg, #fff, #fbf8ff); transition: background 0.4s ease; }
+  body.theme-blue{ --rose:#7bb2ff; --sky:#6aa9ff; --rose-2:#dfeaff; --sky-2:#f0f7ff; --you-start:#eef6ff; --you-end:#e4f0ff; }
+  .bg-photo{position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center; opacity:.18; filter:saturate(110%) contrast(105%)}
+  .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:-1}
+  .hearts span{position:absolute; font-size:18px; opacity:.12; animation:float 14s linear infinite; filter:saturate(130%)}
+  .hearts span:nth-child(odd){opacity:.18} @keyframes float{ from{transform:translateY(110vh) rotate(0)} to{transform:translateY(-10vh) rotate(360deg)} }
+  .app{ position:relative; width:min(1000px,100%); min-height:100%; display:flex; flex-direction:column; border-radius:40px; background-clip:padding-box; }
+  header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)); border-bottom:1px solid #f0e7f3; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-radius:20px }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.5px} .brand .heart{font-size:20px}
+  .chip{padding:6px 10px; border-radius:999px; font-size:12px; background:#fff; border:1px solid #e5e7eb} .chip.ok{color:#16a34a; border-color:#16a34a} .chip.warn{color:#f59e0b; border-color:#f59e0b} .chip.bad{color:#ef4444; border-color:#ef4444}
+  .tabs{display:flex; gap:10px; align-items:center; padding:10px 16px} .tab{padding:10px 14px; border-radius:999px; font-weight:800; border:1px solid #e5e7eb; background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.06); cursor:pointer} .tab[disabled]{opacity:.5; cursor:not-allowed} .tab.active{background:linear-gradient(135deg,var(--sky),var(--rose)); color:#fff; border-color:transparent}
+  .grid{ display:grid; gap:16px; grid-template-columns:1fr; margin:0 16px 16px } @media(min-width:900px){ .grid{ grid-template-columns: .95fr 1.05fr } }
+  .card{ background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86)); border-radius:22px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.05); padding:18px; backdrop-filter: blur(8px); position:relative; overflow:hidden }
+  .sec-title{ font-weight:1000; font-size:14px; margin:6px 0 12px; letter-spacing:.5px; display:flex; align-items:center; gap:8px; z-index:2; position:relative } .sec-title:after{ content:"💞"; opacity:.7 }
+  label{ font-size:12px; color:var(--muted) } select,input[type=text]{ width:100%; padding:13px 16px; border-radius:16px; border:1px solid #e5e7eb; outline:none; font-size:14px; background:#fff }
+  select:focus,input[type=text]:focus{ border-color:var(--ring); box-shadow:0 0 0 4px rgba(147,197,253,.30) } .pill{ border-radius:999px }
+  button{ border:0; padding:12px 16px; border-radius:16px; font-weight:900; cursor:pointer; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--sky),var(--rose)); box-shadow:0 10px 22px rgba(0,0,0,.10) }
+  button.ghost{ background:#fff; color:#111; border:1px solid #e5e7eb; box-shadow:none } button.small{ padding:9px 12px; font-size:12px }
+  .row{ display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end } .row.center{ align-items:center } .muted{ color:var(--muted) } .divider{ height:1px; background:linear-gradient(90deg, #eee, #f6e9f1, #eee); margin:12px 0 }
+  .avatar{ width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:1000; color:#fff; background:linear-gradient(135deg,var(--rose),var(--sky)); box-shadow:0 8px 22px rgba(0,0,0,.12) }
+  .hidden{ display:none !重要 }
+  .watermark{position:absolute; bottom:8px; right:8px; width:90px; height:90px; background-size:cover; background-position:center; opacity:0.25; border-radius:12px; z-index:1}
+  .chat{ display:flex; flex-direction:column; min-height:500px; max-height:72vh; z-index:2; position:relative }
+  .log{ flex:1; overflow:auto; padding:14px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth }
+  .msgrow{ display:flex; gap:12px; align-items:flex-end } .msgrow.me{ justify-content:flex-end }
+  .bubble{ position:relative; max-width:78%; padding:13px 16px; border-radius:22px; background:#f8fafc; border:1px solid #eef2f7; box-shadow:0 6px 18px rgba(0,0,0,.06) }
+  .bubble:after{ content:""; position:absolute; bottom:-2px; width:18px; height:18px; transform:rotate(45deg); background:inherit; border:inherit }
+  .me .bubble{ background:#fff; border-color:#f0f0f0 } .me .bubble:after{ right:8px; border-left-color:transparent; border-top-color:transparent }
+  .you .bubble{ background:linear-gradient(180deg, var(--you-start), var(--you-end)); border-color:rgba(255,182,193,.45) } .you .bubble:after{ left:8px; border-right-color:transparent; border-top-color:transparent }
+  .meta{ font-size:11px; color:var(--muted); margin-top:6px; display:flex; gap:6px; align-items:center }
+  .img{ max-width:260px; border-radius:16px; display:block; box-shadow:0 6px 18px rgba(0,0,0,.08) }
+  .inputbar{ display:flex; gap:12px; padding:12px; background:linear-gradient(180deg,#fff,#fff8); border-top:1px solid #eee; border-bottom-left-radius:18px; border-bottom-right-radius:18px }
+  .inputbar input[type=file]{ display:none }
+  .msg{ flex:1; border:1px solid #e5e7eb; border-radius:999px; padding:13px 18px; font-size:15px; background:#fff }
+  .typing{ font-size:12px; color:var(--muted); margin-top:4px; height:16px }
+  footer{ text-align:center; color:var(--muted); font-size:12px; padding:10px 0 36px }
+  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:10px; font-size:12px; opacity:0; transition:opacity .25s ease; z-index:50}
+  .toast.show{opacity:.9}
+</style>
+</head>
+<body>
+  <div class="bg-photo" id="bgPhoto" aria-hidden="true"></div>
+  <div class="hearts" aria-hidden="true">
+    <span style="left:5%; animation-delay:0s">💗</span><span style="left:18%; animation-delay:2s">💖</span><span style="left:33%; animation-delay:4s">💘</span><span style="left:55%; animation-delay:1s">💞</span><span style="left:72%; animation-delay:3s">💕</span><span style="left:87%; animation-delay:5s">💓</span>
+  </div>
+
+  <div class="app">
+    <header>
+      <div class="brand"><span class="heart">💖</span>科科💖紫荊甜蜜小天地</div>
+      <div class="row center">
+        <button id="themeBtn" class="small ghost" title="切換主題">主題：粉/藍</button>
+        <button id="soundBtn" class="small ghost" title="啟用提示音">提示音：關</button>
+        <label for="bgFile" class="chip" style="cursor:pointer">自選背景</label>
+        <input id="bgFile" type="file" accept="image/*" style="display:none" />
+        <span id="statusChip" class="chip bad">未連線</span><span class="chip ok" title="WebRTC DTLS">已加密</span>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button id="tabConnect" class="tab active">① 連線</button>
+      <button id="tabChat" class="tab" disabled>② 聊天</button>
+    </div>
+
+    <section id="page-connect" class="grid">
+      <div class="card">
+        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAH0B6ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AKuKKKAP//Z')"></div>
+        <div class="sec-title">連線設定</div>
+        <div class="row">
+          <div style="flex:1">
+            <label>我的暱稱</label>
+            <select id="nick" class="pill"><option value="科科寶貝">科科寶貝</option><option value="紫荊寶貝">紫荊寶貝</option></select>
+          </div>
+          <div style="flex:1">
+            <label>我的ID（分享給對方）</label>
+            <input id="myId" class="pill" type="text" readonly />
+          </div>
+          <button id="copyId" class="small ghost">複製ID</button>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <div style="flex:1">
+            <label>對方ID（向對方索取並貼上）</label>
+            <input id="peerId" class="pill" type="text" placeholder="輸入對方ID後按『連線』" />
+          </div>
+          <button id="connectBtn">連線</button>
+        </div>
+        <div class="muted" id="tip" style="margin-top:8px">狀態：待連線</div>
+        <div class="typing" id="typing"> </div>
+      </div>
+    </section>
+
+    <section id="page-chat" class="grid hidden">
+      <div class="card" style="grid-column:1/-1">
+        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCB6AqQDACIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AIPRRRQAH//Z')"></div>
+        <div class="sec-title">聊天</div>
+        <div class="chat">
+          <div id="log" class="log"></div>
+          <div class="inputbar">
+            <label for="imgFile" class="chip" style="cursor:pointer">＋圖片</label>
+            <input id="imgFile" type="file" accept="image/*" capture="environment" />
+            <input id="msg" class="msg" type="text" placeholder="輸入訊息…（Enter送出；輸入 ♥ 自動變愛心貼圖)" />
+            <button id="sendBtn">送出</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>WebRTC 端到端加密｜若無法連線，請確認使用 GitHub Pages 的 https 網址並稍後重試</footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ===== DOM 快捷 =====
+const $=(q)=>document.querySelector(q);
+const statusChip=$('#statusChip'), tip=$('#tip'), myIdEl=$('#myId'), peerIdEl=$('#peerId'), msgEl=$('#msg');
+const imgFileEl=$('#imgFile'), nickEl=$('#nick'), tabConnect=$('#tabConnect'), tabChat=$('#tabChat');
+const pageConnect=$('#page-connect'), pageChat=$('#page-chat'), typingEl=$('#typing');
+const logEl=document.querySelector('#log');
+function showConnect(){tabConnect.classList.add('active');tabChat.classList.remove('active');pageConnect.classList.remove('hidden');pageChat.classList.add('hidden');}
+function showChat(){tabChat.classList.add('active');tabConnect.classList.remove('active');pageChat.classList.remove('hidden');pageConnect.classList.add('hidden');}
+tabConnect.onclick=showConnect; tabChat.onclick=()=>{ if(!tabChat.disabled) showChat(); };
+
+// ===== 主題/提示音/背景 =====
+const themeBtn=$('#themeBtn'), soundBtn=$('#soundBtn'), bgFileEl=$('#bgFile'), bgPhoto=$('#bgPhoto');
+let audioEnabled=false, ac=null; function ensureAC(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); }
+function beep(kind='msg'){ if(!audioEnabled) return; ensureAC(); const o=ac.createOscillator(), g=ac.createGain(); o.type='sine'; o.frequency.value=(kind==='connect')?880:(kind==='send'?660:520); g.gain.value=0.0001; o.connect(g); g.connect(ac.destination); const t=ac.currentTime; g.gain.exponentialRampToValueAtTime(0.04,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.15); o.start(); o.stop(t+0.16); }
+soundBtn.onclick=()=>{ audioEnabled=!audioEnabled; if(audioEnabled){ ensureAC(); beep('connect'); soundBtn.textContent='提示音：開'; } else soundBtn.textContent='提示音：關'; };
+(function(){ const saved=localStorage.getItem('sweet.theme')||'rose'; if(saved==='blue') document.body.classList.add('theme-blue'); })();
+function toggleTheme(){ document.body.classList.toggle('theme-blue'); const m=document.body.classList.contains('theme-blue')?'blue':'rose'; localStorage.setItem('sweet.theme',m); }
+themeBtn.onclick=toggleTheme; bgFileEl.onchange=()=>{ const f=bgFileEl.files?.[0]; if(!f) return; const url=URL.createObjectURL(f); bgPhoto.style.backgroundImage=`url(${url})`; };
+
+// ===== UI 工具 =====
+function setStatus(t,cls){ statusChip.textContent=t; statusChip.className='chip '+(cls||''); }
+function setTip(t){ tip.textContent='狀態：'+t; }
+function now(){ const d=new Date(); const p=n=>String(n).padStart(2,'0'); return `${p(d.getHours())}:${p(d.getMinutes())}`; }
+function esc(s){ return s.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+function addMsg(who,html){ const row=document.createElement('div'); row.className='msgrow '+who; const avatar=`<div class="avatar">${who==='me'?(nickEl.value||'我')[0]:'❤'}</div>`; const bubble=`<div><div class="bubble">${html}</div><div class="meta">${who==='me'?'我':'對方'} · ${now()}</div></div>`; row.innerHTML = who==='me'? `${bubble}${avatar}` : `${avatar}${bubble}`; logEl.appendChild(row); logEl.scrollTop=logEl.scrollHeight; }
+
+// ===== Toast =====
+const toastEl = document.getElementById('toast');
+function toast(msg,ms=1200){ toastEl.textContent=msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), ms); }
+
+// ===== 可靠的複製：Clipboard API → execCommand → prompt =====
+async function copyText(text){
+  // 1) 嘗試 Clipboard API（需 https + 使用者手勢 + 站點允許）
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      toast('已複製 ID');
+      return true;
+    }
+  }catch(e){ /* 可能被 Permissions-Policy 擋住 */ }
+  // 2) 傳統備援：選取隱藏 textarea + execCommand
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-1000px';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    const ok=document.execCommand && document.execCommand('copy');
+    document.body.removeChild(ta);
+    if(ok){ toast('已複製 ID'); return true; }
+  }catch(e){ /* ignore */ }
+  // 3) 最終退路：顯示手動複製提示
+  window.prompt('無法自動複製，請手動複製此 ID：', text);
+  return false;
+}
+
+// 讓輸入框點一下全選，方便手動複製
+myIdEl.addEventListener('click',()=>{ myIdEl.select(); myIdEl.setSelectionRange(0, 99999); });
+
+// ===== PeerJS 載入與連線 =====
+const ICE_SERVERS=[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun.cloudflare.com:3478'] }];
+const PeerCDNs=['https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js','https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js','https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js'];
+function loadScriptSeq(urls){return new Promise((res,rej)=>{let i=0;const next=()=>{if(i>=urls.length) return rej();const s=document.createElement('script');s.src=urls[i++];s.async=true;s.onload=res;s.onerror=()=>{s.remove();next();};document.head.appendChild(s);};next();});}
+
+let peer=null, conn=null;
+(async()=>{try{await loadScriptSeq(PeerCDNs);}catch(e){ setStatus('信令失敗','warn'); setTip('CDN 無法載入，請換網路或稍後再試'); return; }
+  peer=new Peer({config:{iceServers:ICE_SERVERS}});
+  peer.on('open',id=>{ myIdEl.value=id; setStatus('就緒（待連線）','warn'); setTip('互換ID，貼上對方ID後按連線'); });
+  peer.on('connection',c=>{ if(conn){ c.close(); return; } conn=c; wireConn(); });
+  peer.on('error',e=>{ console.error(e); setStatus('錯誤','bad'); setTip(String(e)); });
+})();
+
+function wireConn(){
+  setStatus('連線中…','warn'); setTip('建立 P2P');
+  conn.on('open',()=>{ setStatus('已連線','ok'); setTip('開始聊天吧！'); tabChat.disabled=false; showChat(); beep('connect'); });
+  conn.on('data',d=>{
+    if(d instanceof Blob || d instanceof ArrayBuffer){ const b=d instanceof Blob? d: new Blob([d]); const url=URL.createObjectURL(b); addMsg('you',`<img class=img src="${url}">`); beep('msg'); return; }
+    addMsg('you', esc(String(d)).replace(/♥/g,'💖')); beep('msg');
+  });
+  conn.on('close',()=>{ setStatus('已斷線','bad'); setTip('連線已關閉'); });
+  conn.on('error',e=>{ setStatus('錯誤','bad'); setTip(String(e)); });
+}
+
+// === 按鈕事件 ===
+$('#copyId').addEventListener('click', ()=> copyText(myIdEl.value||''));
+$('#connectBtn').addEventListener('click', ()=>{ if(!peer){ alert('PeerJS 尚未就緒'); return; } const id=peerIdEl.value.trim(); if(!id){ alert('請輸入對方ID'); return; } if(conn) try{ conn.close(); }catch(_){} conn=peer.connect(id,{reliable:true}); wireConn(); });
+$('#sendBtn').addEventListener('click', sendText);
+msgEl?.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendText(); }});
+function sendText(){ const t=msgEl.value.trim(); if(!t) return; if(!conn||!conn.open){ alert('尚未連線'); return; } conn.send(t); addMsg('me', esc(t).replace(/♥/g,'💖')); beep('send'); msgEl.value=''; msgEl.focus(); }
+
+imgFileEl?.addEventListener('change', async()=>{ const f=imgFileEl.files?.[0]; if(!f) return; if(!conn||!conn.open){ alert('尚未連線'); imgFileEl.value=''; return; }
+  try{ const blob=await toJPEGBlob(f); conn.send(blob); const url=URL.createObjectURL(blob); addMsg('me',`<img class=img src="${url}">`); beep('send'); }
+  catch(e){ alert('圖片處理失敗：'+e); } imgFileEl.value='';
+});
+function toJPEGBlob(file,maxW=1600,maxH=1600,quality=0.85){ return new Promise((resolve,reject)=>{ const img=new Image(); const url=URL.createObjectURL(file); img.onload=()=>{ let w=img.width,h=img.height; const r=Math.min(1,maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h); c.toBlob(b=>{ URL.revokeObjectURL(url); resolve(b); },'image/jpeg',quality); }; img.onerror=reject; img.src = url; }); }
+
+// ===== 自我測試（不影響 UI） =====
+(function selfTests(){
+  console.group('Self tests');
+  const enc=esc('<>&'); console.assert(enc==='&lt;&gt;&amp;'||enc==='&lt;&gt;&amp;', 'esc() 應轉義成功', enc);
+  const t=now(); console.assert(/^\d{2}:\d{2}$/.test(t), 'now() 應回 HH:MM', t);
+  console.groupEnd();
+})();
+
+// 記住暱稱
+(function(){ const saved = localStorage.getItem('lc.nick'); if(saved) nickEl.value=saved; nickEl.addEventListener('change', ()=> localStorage.setItem('lc.nick', nickEl.value)); })();
+</script>
+</body>
+</html>
