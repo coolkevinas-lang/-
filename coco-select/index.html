@@ -15,7 +15,7 @@
 <div class="loading"><div class="card"><strong>CO CO SELECT</strong><br>頁面載入中...</div></div>
 <script>
 (async () => {
-  const parts = ["part00.txt","part01.txt","part02.txt","part03.txt"];
+  const parts = ["p00.txt","p01.txt","p02.txt","p03.txt","p04.txt","p05.txt","p06.txt","p07.txt","p08.txt","p09.txt"];
   const encoded = (await Promise.all(parts.map(p => fetch(p, {cache: "no-store"}).then(r => {
     if (!r.ok) throw new Error("讀取 " + p + " 失敗");
     return r.text();
