@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CO CO SELECT｜少買錯，買得更聰明</title>
+<meta name="description" content="CO CO SELECT 精選 18 個值得收藏的美妝保養與內衣飾品清單。">
+<style>
+  html,body{margin:0;min-height:100%;background:#f6f1e9;color:#171716;font-family:Arial,"DFKai-SB","標楷體",serif;}
+  .loading{min-height:100vh;display:grid;place-items:center;text-align:center;letter-spacing:.08em;}
+  .card{padding:28px 34px;border:1px solid #d7b579;border-radius:12px;background:rgba(255,253,248,.8);box-shadow:0 24px 70px rgba(35,31,25,.09);}
+</style>
+</head>
+<body>
+<div class="loading"><div class="card"><strong>CO CO SELECT</strong><br>頁面載入中...</div></div>
+<script>
+(async () => {
+  const parts = ["part00.txt","part01.txt","part02.txt","part03.txt"];
+  const encoded = (await Promise.all(parts.map(p => fetch(p, {cache: "no-store"}).then(r => {
+    if (!r.ok) throw new Error("讀取 " + p + " 失敗");
+    return r.text();
+  })))).join("");
+  const binary = Uint8Array.from(atob(encoded), c => c.charCodeAt(0));
+  if (!("DecompressionStream" in window)) {
+    throw new Error("此瀏覽器不支援 DecompressionStream，請使用新版 Chrome / Edge / Safari / Firefox 開啟。");
+  }
+  const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
+  const html = await new Response(stream).text();
+  document.open();
+  document.write(html);
+  document.close();
+})().catch(error => {
+  document.body.innerHTML = '<pre style="white-space:pre-wrap;padding:24px;font:16px/1.6 Arial,sans-serif;">頁面載入失敗：' + String(error && error.message || error) + '</pre>';
+});
+</script>
+</body>
+</html>
