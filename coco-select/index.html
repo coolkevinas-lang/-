@@ -1,37 +1,111 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CO CO SELECT｜少買錯，買得更聰明</title>
-<meta name="description" content="CO CO SELECT 精選 18 個值得收藏的美妝保養與內衣飾品清單。">
+<meta name="description" content="CO CO SELECT 精選美妝保養與內衣飾品清單，用清楚分類、推薦理由與購物指南，幫你快速判斷哪些真的值得收藏。" />
+<meta property="og:title" content="CO CO SELECT｜少買錯，買得更聰明" />
+<meta property="og:description" content="精選美妝保養與內衣飾品清單，用清楚分類、推薦理由與購物指南，找到真正適合自己的日常選擇。" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="zh_TW" />
 <style>
-  html,body{margin:0;min-height:100%;background:#f6f1e9;color:#171716;font-family:Arial,"DFKai-SB","標楷體",serif;}
-  .loading{min-height:100vh;display:grid;place-items:center;text-align:center;letter-spacing:.08em;}
-  .card{padding:28px 34px;border:1px solid #d7b579;border-radius:12px;background:rgba(255,253,248,.8);box-shadow:0 24px 70px rgba(35,31,25,.09);}
+:root{--bg:#f6f1e9;--card:rgba(255,253,248,.78);--ink:#171716;--muted:#665f56;--line:#e2d7c8;--gold:#d7b579;--brown:#8b6942;--rose:#9f4658;--rose2:#f8e9ec;--shadow:0 24px 70px rgba(35,31,25,.09);--shadow2:0 34px 90px rgba(35,31,25,.16);--r:10px;--font:Arial,"DFKai-SB","標楷體",serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--ink);font-family:var(--font);line-height:1.7;background:linear-gradient(90deg,rgba(215,181,121,.12) 0 1px,transparent 1px 112px),linear-gradient(180deg,rgba(174,185,191,.13) 0 1px,transparent 1px 112px),radial-gradient(ellipse at 12% 8%,rgba(255,255,255,.95),transparent 30%),radial-gradient(ellipse at 86% 8%,rgba(234,211,216,.48),transparent 33%),linear-gradient(135deg,#fffaf2,#f6f1e9 62%,#f1e6df)}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 0 43%,rgba(255,255,255,.78) 49%,rgba(174,185,191,.25) 51%,transparent 60%);animation:sweep 12s ease-in-out infinite}@keyframes sweep{0%,35%{transform:translateX(-64%)}72%,100%{transform:translateX(64%)}}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{border:0}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.header{position:sticky;top:0;z-index:40;display:grid;grid-template-columns:auto 1fr minmax(220px,330px);gap:24px;align-items:center;padding:18px clamp(18px,4vw,54px);border-bottom:1px solid rgba(215,181,121,.36);background:rgba(246,241,233,.82);backdrop-filter:blur(22px);box-shadow:0 16px 42px rgba(35,31,25,.05)}
+.logo{display:inline-grid;gap:2px;font-family:Arial,"DFKai-SB","標楷體",serif;font-weight:900;line-height:.82;letter-spacing:.16em}.logo b{font-size:1.34rem;background:linear-gradient(112deg,#171716,#654b37 45%,#9f4658 80%,#d7b579);-webkit-background-clip:text;background-clip:text;color:transparent}.logo span{font-size:.82rem;color:#5e554b;letter-spacing:.28em}.nav{display:flex;justify-content:center;gap:24px;color:var(--muted);font-size:.94rem}.nav a:hover{color:var(--brown)}.search input,.filters select{width:100%;min-height:42px;border:1px solid rgba(215,181,121,.46);border-radius:999px;background:rgba(255,253,248,.9);outline:none;color:var(--ink);padding:0 16px}.search input:focus,.filters select:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(215,181,121,.16)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);gap:clamp(34px,6vw,86px);align-items:center;min-height:650px;padding:82px 0 62px}.eyebrow{margin:0 0 12px;color:var(--brown);font-size:.78rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h1{max-width:760px;margin-bottom:28px;font-size:clamp(3.2rem,7vw,6.8rem);line-height:.96;background:linear-gradient(105deg,#171716,#5d4a36 46%,#9f4658 88%);-webkit-background-clip:text;background-clip:text;color:transparent}h2{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;margin-bottom:12px}.lead{max-width:680px;color:var(--muted);font-size:clamp(1.04rem,2vw,1.28rem)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border-radius:999px;font-weight:900;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s background}.btn:hover,.btn:focus-visible{transform:translateY(-2px)}.primary{color:white;background:linear-gradient(135deg,#151514,#6c5642 54%,#9f4658);box-shadow:0 16px 36px rgba(23,23,22,.18)}.ghost{border:1px solid rgba(215,181,121,.46);background:rgba(255,253,248,.72)}
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card,.product,.guide article,.modal-panel{position:relative;overflow:hidden;border:1px solid rgba(215,181,121,.36);border-radius:var(--r);background:var(--card);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.card:before,.product:before,.guide article:before,.modal-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.68),transparent 42%),linear-gradient(90deg,rgba(215,181,121,.24),transparent 34%,rgba(174,185,191,.16) 72%,transparent);opacity:.58;pointer-events:none}.card>* ,.product>* ,.guide article>* ,.modal-panel>*{position:relative;z-index:1}.card{padding:20px;display:grid;gap:14px}.card.big{grid-column:1/-1;grid-template-columns:minmax(160px,.65fr) 1fr;align-items:end;min-height:320px;padding:24px}.card h2,.card h3{margin-bottom:6px}.muted{color:var(--muted)}.visual{display:grid;place-items:center;min-height:145px;border:1px solid rgba(215,181,121,.25);border-radius:var(--r);background:radial-gradient(circle at 24% 18%,rgba(255,255,255,.95),transparent 32%),repeating-linear-gradient(112deg,transparent 0 24px,rgba(174,185,191,.09) 25px,transparent 26px),linear-gradient(135deg,#fffaf3,#f0e7db)}.card.big .visual{min-height:235px}.mark{display:grid;place-items:center;width:104px;height:104px;border-radius:28px;border:1px solid rgba(215,181,121,.42);background:linear-gradient(135deg,#fff,#f4eadf);font-family:Arial,sans-serif;font-weight:900;font-size:1.55rem;color:var(--rose);letter-spacing:.04em;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 16px 36px rgba(35,31,25,.08)}.section{padding:56px 0}.section-head{margin-bottom:26px}.section-head p{max-width:680px;color:var(--muted)}
+.top-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}.top-card{display:grid;gap:13px;padding:18px;cursor:pointer;transition:transform .24s cubic-bezier(.2,.9,.22,1.2),box-shadow .2s,border-color .2s,background .2s}.top-card:hover,.top-card:focus-visible{z-index:2;transform:translateY(-10px) scale(1.035);border-color:var(--gold);box-shadow:var(--shadow2),0 18px 42px rgba(215,181,121,.18);background:rgba(255,253,248,.92);animation:pop .36s cubic-bezier(.18,.89,.32,1.28) both}@keyframes pop{0%{transform:translateY(0) scale(1)}58%{transform:translateY(-13px) scale(1.045)}100%{transform:translateY(-10px) scale(1.035)}}.top-card strong{display:block;color:var(--brown);font-size:1.45rem}.mini{height:82px}.mini .mark{width:66px;height:66px;border-radius:18px;font-size:1rem}
+.filters{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;margin-bottom:24px;padding:14px;border:1px solid rgba(215,181,121,.36);border-radius:999px;background:rgba(255,253,248,.72);backdrop-filter:blur(16px)}.filters label{display:grid;gap:5px;color:var(--muted);font-size:.82rem;font-weight:900}.reset{align-self:end}.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product{display:grid;grid-template-rows:178px 1fr;transition:transform .18s,box-shadow .18s,border-color .18s}.product:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow2)}.product .visual{border-radius:0;min-height:178px}.body{padding:18px;display:grid;gap:10px}.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.chip{display:inline-flex;width:fit-content;align-items:center;min-height:27px;padding:0 10px;border-radius:999px;font-size:.78rem;font-weight:900}.cat{background:var(--rose2);color:var(--rose)}.need{border:1px solid rgba(215,181,121,.34);background:rgba(255,255,255,.72);color:var(--muted)}.score{color:var(--brown);font-weight:900}.desc{color:var(--muted)}.compare-table{overflow:auto;border:1px solid rgba(215,181,121,.36);border-radius:var(--r);background:rgba(255,253,248,.8);box-shadow:var(--shadow)}table{width:100%;min-width:860px;border-collapse:collapse}th,td{padding:15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:.82rem;color:var(--muted);text-transform:uppercase}tr:last-child td{border-bottom:0}.guide{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.guide article{padding:20px}.guide span{color:var(--brown);font-weight:900}.footer{display:flex;justify-content:space-between;gap:24px;padding:42px clamp(18px,4vw,54px);border-top:1px solid rgba(215,181,121,.36);background:rgba(255,253,248,.38);color:var(--muted)}.footer nav{display:flex;gap:14px;flex-wrap:wrap}.empty{padding:28px;border:1px dashed var(--line);border-radius:var(--r);text-align:center;color:var(--muted)}
+.modal{position:fixed;inset:0;z-index:100;display:none}.modal.open{display:block}.backdrop{position:absolute;inset:0;background:rgba(23,23,22,.24);backdrop-filter:blur(18px)}.modal-panel{position:relative;width:min(900px,calc(100% - 32px));max-height:calc(100vh - 52px);overflow:auto;margin:26px auto;padding:clamp(22px,4vw,42px);background:rgba(255,253,248,.94);box-shadow:0 28px 90px rgba(23,23,22,.22)}.close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(215,181,121,.36);background:#fbf5ea;cursor:pointer;font-size:1.45rem}.modal-layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:center;margin-bottom:20px}.modal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}.modal-grid section,.reason{padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.62)}.modal-grid ul{margin:0;padding-left:1.2em}.hide{display:none!important}
+@media(max-width:1024px){.header{grid-template-columns:auto 1fr}.nav{display:none}.search{grid-column:1/-1}.hero{grid-template-columns:1fr}.top-grid,.guide{grid-template-columns:repeat(2,minmax(0,1fr))}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:1fr 1fr;border-radius:var(--r)}}@media(max-width:680px){.hero{min-height:0;padding-top:44px}h1{font-size:clamp(3rem,18vw,4.35rem)}.showcase,.card.big,.top-grid,.filters,.product-grid,.guide,.modal-layout,.modal-grid{grid-template-columns:1fr}.row,.footer{align-items:flex-start;flex-direction:column}.footer{display:flex}.header{grid-template-columns:1fr}.search{grid-column:auto}}
 </style>
 </head>
 <body>
-<div class="loading"><div class="card"><strong>CO CO SELECT</strong><br>頁面載入中...</div></div>
+<header class="header">
+<a class="logo" href="#top" aria-label="CO CO SELECT 回到首頁"><b>CO CO</b><span>SELECT</span></a>
+<nav class="nav" aria-label="主導覽"><a href="#top">首頁</a><a href="#featured">精選推薦</a><a href="#compare">比較</a><a href="#guide">選物指南</a></nav>
+<label class="search"><span style="position:absolute;left:-9999px">搜尋</span><input id="q" type="search" autocomplete="off" placeholder="搜尋品牌或生活情境"></label>
+</header>
+<main id="top">
+<section class="hero wrap">
+<div>
+<p class="eyebrow">Smart select, less regret</p>
+<h1>少買錯，買得更聰明</h1>
+<p class="lead">精選美妝保養與內衣飾品清單。重點不是叫你買更多，而是幫你用膚況、尺寸、支撐、材質與使用情境，快速排除不適合的選項。</p>
+<div class="actions"><a class="btn primary" href="#featured">查看人氣清單</a><a class="btn ghost" href="#guide">看選物指南</a></div>
+</div>
+<div class="showcase" aria-label="精選展示">
+<article class="card big" data-open="p01"><div class="visual"><div class="mark">KO</div></div><div><p class="muted">人氣清單首選</p><h2>KORENA 珂蕾娜</h2><p class="score">推薦分數 98</p></div></article>
+<article class="card" data-open="p02"><div class="visual"><div class="mark">KM</div></div><div><p class="muted">美妝保養</p><h3>KISSME 奇士美</h3></div></article>
+<article class="card" data-open="p03"><div class="visual"><div class="mark">BF</div></div><div><p class="muted">成分派保養</p><h3>BFFECT 好肌膚精華研究室</h3></div></article>
+</div>
+</section>
+<section class="section wrap">
+<div class="section-head"><p class="eyebrow">Top 5</p><h2>最值得收藏 TOP 5</h2><p>優先看「使用頻率高、踩雷成本高、需求明確」的項目。滑鼠移過去會有彈跳效果。</p></div>
+<div class="top-grid" id="topGrid"></div>
+</section>
+<section class="section wrap" id="featured">
+<div class="section-head row"><div><p class="eyebrow">Featured</p><h2>精選推薦</h2><p>先用分類、需求與排序縮小範圍，再點開卡片看適合誰、不適合誰、優點與留意事項。</p></div><strong id="count" class="muted"></strong></div>
+<div class="filters">
+<label>分類<select id="category"></select></label>
+<label>需求<select id="need"></select></label>
+<label>排序<select id="sort"><option value="score-desc">推薦分數高到低</option><option value="score-asc">推薦分數低到高</option><option value="name">品牌名稱</option></select></label>
+<button class="btn ghost reset" id="reset" type="button">重設</button>
+</div>
+<div class="product-grid" id="products"></div>
+<div class="empty hide" id="empty">找不到符合條件的項目。請放寬分類或搜尋字。</div>
+</section>
+<section class="section wrap" id="compare">
+<div class="section-head"><p class="eyebrow">Compare</p><h2>快速比較</h2><p>分數不是絕對答案，只是協助你先排序。真正要看的是「你的需求」和「產品限制」是否匹配。</p></div>
+<div class="compare-table"><table><thead><tr><th>品牌 / 項目</th><th>分類</th><th>適合情境</th><th>主要優點</th><th>留意事項</th><th>分數</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+</section>
+<section class="section wrap" id="guide">
+<div class="section-head"><p class="eyebrow">Buying Guide</p><h2>選物指南</h2></div>
+<div class="guide">
+<article><span>01</span><h3>先判斷是不是高頻剛需</h3><p>每天或每週會用到的保養、底妝、內衣與飾品，才值得優先研究。低頻衝動品先放進清單，隔 24 小時再決定。</p></article>
+<article><span>02</span><h3>保養看膚況與成分邏輯</h3><p>乾肌看保濕與修護，油肌看清爽與控油，敏感肌優先避開高香精、酒精與高刺激酸類。第一次買先選小容量或有試用。</p></article>
+<article><span>03</span><h3>內衣先確認尺寸與支撐</h3><p>先量上胸圍、下胸圍，再看罩杯是否浮杯、壓胸，下圍是否上滑，肩帶是否勒肩。首次購買優先選可退換尺寸的通路。</p></article>
+<article><span>04</span><h3>飾品與送禮看材質與售後</h3><p>看耳針、鍍層、925 銀、醫療鋼、抗過敏標示與保養方式。送禮要確認包裝、保固、退換貨與到貨時間。</p></article>
+</div>
+</section>
+</main>
+<footer class="footer"><div><a class="logo" href="#top"><b>CO CO</b><span>SELECT</span></a><p>© 2026 CO CO SELECT.</p></div><nav><a href="#featured">精選推薦</a><a href="#compare">比較</a><a href="#guide">選物指南</a></nav></footer>
+<div class="modal" id="modal" aria-hidden="true"><div class="backdrop" data-close></div><article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" type="button" data-close>×</button><div class="modal-layout"><div class="visual"><div class="mark" id="mMark">CO</div></div><div><p class="eyebrow" id="mCat"></p><h2 id="modalTitle"></h2><div class="score" id="mScore"></div><p class="muted" id="mDesc"></p></div></div><div class="modal-grid"><section><h3>適合誰</h3><p id="mBest"></p></section><section><h3>不適合誰</h3><p id="mNot"></p></section><section><h3>優點</h3><ul id="mPros"></ul></section><section><h3>留意</h3><ul id="mCons"></ul></section></div><section class="reason"><h3>為什麼值得推薦</h3><p id="mWhy"></p></section></article></div>
 <script>
-(async () => {
-  const parts = ["p00.txt","p01.txt","p02.txt","p03.txt","p04.txt","p05.txt","p06.txt","p07.txt","p08.txt","p09.txt"];
-  const encoded = (await Promise.all(parts.map(p => fetch(p, {cache: "no-store"}).then(r => {
-    if (!r.ok) throw new Error("讀取 " + p + " 失敗");
-    return r.text();
-  })))).join("");
-  const binary = Uint8Array.from(atob(encoded), c => c.charCodeAt(0));
-  if (!("DecompressionStream" in window)) {
-    throw new Error("此瀏覽器不支援 DecompressionStream，請使用新版 Chrome / Edge / Safari / Firefox 開啟。");
-  }
-  const stream = new Blob([binary]).stream().pipeThrough(new DecompressionStream("gzip"));
-  const html = await new Response(stream).text();
-  document.open();
-  document.write(html);
-  document.close();
-})().catch(error => {
-  document.body.innerHTML = '<pre style="white-space:pre-wrap;padding:24px;font:16px/1.6 Arial,sans-serif;">頁面載入失敗：' + String(error && error.message || error) + '</pre>';
-});
+const products=[
+{id:'p01',name:'KORENA 珂蕾娜',mark:'KO',cat:'美妝保養',need:'保濕修護',score:98,desc:'保養質感與日常需求都清楚，適合先從高分選項開始看。',best:'想先買一個穩健、不容易出錯的保養選項。',not:'只想找極低價或單一強效酸類產品。',pros:['日常使用門檻低','推薦理由清楚','適合作為保養清單起點'],cons:['仍需依膚況測試','敏感肌建議先局部試用'],why:'保養品最怕買到不合膚況。這類項目適合用「膚況、質地、使用頻率」先篩選。'},
+{id:'p02',name:'KISSME 奇士美',mark:'KM',cat:'美妝保養',need:'彩妝持久',score:96,desc:'彩妝使用情境明確，適合需要穩定妝效與日常補妝的人。',best:'需要眼妝、底妝或日常彩妝穩定度的人。',not:'完全不化妝或追求極簡裸妝的人。',pros:['品牌辨識度高','彩妝需求明確','適合高頻使用'],cons:['色號仍需實際比對','卸妝要確實'],why:'彩妝應該先看持久、暈染、膚色匹配與卸除難度，而不是只看包裝。'},
+{id:'p03',name:'BFFECT 好肌膚精華研究室',mark:'BF',cat:'美妝保養',need:'成分精華',score:95,desc:'成分訴求清楚，適合願意按照膚況選精華的人。',best:'想用成分邏輯解決保濕、控油、暗沉或粗糙問題。',not:'不想研究成分、只想快速買香味型保養的人。',pros:['訴求清楚','容易對應膚況','適合進階保養'],cons:['成分疊加需注意刺激','新手建議單品測試'],why:'精華最重要的是活性成分濃度、刺激性與搭配順序，不能只看名稱。'},
+{id:'p04',name:'佳瑪大罩杯內衣',mark:'GM',cat:'內衣飾品',need:'大罩杯支撐',score:94,desc:'尺寸與支撐需求明確，適合重視穩定包覆的人。',best:'大罩杯、久坐久站或需要更好支撐的人。',not:'只追求薄款無感、不需要支撐的人。',pros:['需求明確','尺寸導向','舒適度容易評估'],cons:['需確認退換貨','尺寸不合會大幅影響體感'],why:'內衣是典型不能只看外觀的品項。支撐、下圍、肩帶與杯型才是核心。'},
+{id:'p05',name:'點睛品',mark:'DP',cat:'內衣飾品',need:'送禮質感',score:93,desc:'送禮情境清楚，適合看重品牌、包裝與紀念感的人。',best:'生日、紀念日、正式送禮，需要體面且好搭配。',not:'只找低預算流行飾品的人。',pros:['品牌感強','送禮辨識度高','售後較容易確認'],cons:['價格需和材質比對','款式要考慮對方日常穿搭'],why:'飾品送禮不只看漂亮，還要看材質、過敏風險、包裝與售後。'},
+{id:'p06',name:'DR.WU 達爾膚',mark:'DW',cat:'美妝保養',need:'醫美保養',score:92,desc:'適合想從醫美通路熟悉品牌入門的人。',best:'重視成分、品牌可信度與保養步驟的人。',not:'偏好香氛型、包裝型保養的人。',pros:['品項完整','成分訴求明確','通路常見'],cons:['不同系列差異大','需避開過度疊加'],why:'選醫美保養要先看膚況與耐受度，不是看到高濃度就買。'},
+{id:'p07',name:'AHC',mark:'AH',cat:'美妝保養',need:'眼周保養',score:91,desc:'適合想補強眼周、細紋與保濕感的人。',best:'眼周偏乾、上妝卡紋、想加強局部保養。',not:'期待一次解決深層皺紋或黑眼圈的人。',pros:['定位清楚','局部保養方便','保濕導向'],cons:['眼周產品需少量使用','效果不能神化'],why:'眼周產品重點是保濕、溫和與持續使用，不是過度追求刺激性成分。'},
+{id:'p08',name:'heme',mark:'HE',cat:'美妝保養',need:'彩妝入門',score:90,desc:'適合彩妝新手或想用合理價格建立日常色系的人。',best:'想買腮紅、眼影、唇彩等日常彩妝。',not:'只追求專櫃高級質地的人。',pros:['價格相對友善','色系選擇多','適合日常妝'],cons:['色號需試色','粉質妝感因人而異'],why:'彩妝入門不該一次買太多，先從最常用色系開始。'},
+{id:'p09',name:'DHC',mark:'DH',cat:'美妝保養',need:'卸妝清潔',score:89,desc:'適合有卸妝、清潔與基礎保養需求的人。',best:'有防曬、彩妝，需要穩定清潔步驟。',not:'對油類卸妝不耐或容易長粉刺的人。',pros:['清潔需求明確','品項容易理解','高頻使用'],cons:['油肌需注意乳化','清潔後仍需保濕'],why:'清潔類產品要看是否卸得乾淨且不過度拔乾，這比香味更重要。'},
+{id:'p10',name:'薇佳 Swissvita',mark:'SV',cat:'美妝保養',need:'修護保濕',score:88,desc:'適合重視修護、保濕與膚況穩定的人。',best:'換季不穩、乾燥、想建立基礎修護。',not:'只想追求快速強效煥膚的人。',pros:['修護定位明確','適合基礎保養','通路好找'],cons:['敏感期仍需簡化步驟','需觀察質地是否悶'],why:'保養的底層邏輯是屏障穩定，屏障不穩時再多活性都可能變成刺激。'},
+{id:'p11',name:'1028',mark:'10',cat:'美妝保養',need:'底妝控油',score:87,desc:'適合需要底妝、蜜粉或控油妝效的人。',best:'上班、通勤、需要妝感乾淨與補妝方便。',not:'不化妝或偏好極度光澤妝的人。',pros:['通路普及','價格較好入手','日常實用'],cons:['底妝色號需比對','乾肌需先保濕'],why:'底妝選擇先看膚質、色號、遮瑕度與持妝環境。'},
+{id:'p12',name:'Solone',mark:'SO',cat:'美妝保養',need:'眼妝工具',score:86,desc:'適合想補足眼妝、眉彩或工具類需求的人。',best:'需要快速完成眼妝與眉型的人。',not:'完全不畫眼妝的人。',pros:['工具與彩妝選項多','入門成本較低','實用度高'],cons:['新手需練習手感','顏色要避免過重'],why:'眼妝工具重點是手感、顯色控制與不暈染，不是只看網路照片。'},
+{id:'p13',name:'曼黛瑪璉',mark:'MD',cat:'內衣飾品',need:'機能內衣',score:85,desc:'適合重視包覆、集中與機能設計的人。',best:'需要穩定支撐、修飾線條與日常穿著。',not:'偏好完全無鋼圈、極薄無感的人。',pros:['機能定位清楚','尺寸選擇較完整','適合日常比較'],cons:['建議實際試穿','不同系列體感差異大'],why:'機能內衣要看支撐與活動穩定，不是只看照片。'},
+{id:'p14',name:'Lady 內衣',mark:'LA',cat:'內衣飾品',need:'舒適包覆',score:84,desc:'適合想在舒適與修飾之間取得平衡的人。',best:'日常通勤、久穿，需要穩定但不過度壓迫。',not:'只想找無尺碼背心式內衣的人。',pros:['日常穿著導向','包覆感較容易判斷','適合比較尺寸'],cons:['需確認杯型','退換貨條件要看清楚'],why:'舒適不等於沒有支撐，真正舒服是尺寸正確且壓力分佈合理。'},
+{id:'p15',name:'VACANZA ACCESSORY',mark:'VA',cat:'內衣飾品',need:'日常飾品',score:83,desc:'適合想找日常搭配、風格明確飾品的人。',best:'想用耳環、項鍊、戒指提升穿搭完整度。',not:'只看貴金屬保值的人。',pros:['款式豐富','日常搭配性高','送禮門檻較低'],cons:['要看材質與過敏風險','鍍層需保養'],why:'平價飾品要看材質、鍍層與保養方式，不然漂亮只撐幾次。'},
+{id:'p16',name:'MEIER.Q 飾品',mark:'MQ',cat:'內衣飾品',need:'風格搭配',score:82,desc:'適合想找服飾與飾品風格一致的人。',best:'想買容易搭配日常穿搭的飾品或配件。',not:'追求高珠寶規格或保值的人。',pros:['風格整體性高','搭配門檻低','適合日常'],cons:['材質標示要確認','需看實拍與尺寸'],why:'飾品不能只看單品照，要想像放在衣服、膚色與場合裡是否成立。'},
+{id:'p17',name:'Grace Gift 配件',mark:'GG',cat:'內衣飾品',need:'穿搭配件',score:81,desc:'適合找包款、鞋款與配件搭配的人。',best:'想提升整體穿搭完整度，不只買單一飾品。',not:'只找珠寶飾品的人。',pros:['配件選擇多','風格明確','適合送禮與自用'],cons:['尺寸與材質要確認','包鞋需看退換貨'],why:'配件類最怕照片好看但尺寸不合，購買前要看實際尺寸與材質。'},
+{id:'p18',name:'日常無痕內衣',mark:'NU',cat:'內衣飾品',need:'無痕舒適',score:80,desc:'適合需要貼身衣物不顯痕、久穿舒服的人。',best:'穿襯衫、合身上衣、通勤久坐的人。',not:'需要強力集中或大幅支撐的人。',pros:['穿搭相容性高','舒適度佳','日常高頻'],cons:['支撐力通常較弱','尺寸不合會捲邊'],why:'無痕內衣的優點是服貼，但要接受支撐有限，不能用機能內衣標準要求。'}
+];
+const qs=s=>document.querySelector(s);const qsa=s=>[...document.querySelectorAll(s)];const state={q:'',cat:'全部',need:'全部',sort:'score-desc'};
+function initials(p){return `<div class="visual"><div class="mark">${p.mark}</div></div>`}
+function renderOptions(){const cats=['全部',...new Set(products.map(p=>p.cat))];const needs=['全部',...new Set(products.map(p=>p.need))];qs('#category').innerHTML=cats.map(x=>`<option>${x}</option>`).join('');qs('#need').innerHTML=needs.map(x=>`<option>${x}</option>`).join('')}
+function list(){let arr=products.filter(p=>(state.cat==='全部'||p.cat===state.cat)&&(state.need==='全部'||p.need===state.need)&&(`${p.name} ${p.cat} ${p.need} ${p.desc}`).toLowerCase().includes(state.q.toLowerCase())));arr.sort((a,b)=>state.sort==='score-asc'?a.score-b.score:state.sort==='name'?a.name.localeCompare(b.name,'zh-Hant'):b.score-a.score);return arr}
+function renderTop(){qs('#topGrid').innerHTML=products.slice().sort((a,b)=>b.score-a.score).slice(0,5).map((p,i)=>`<article class="card top-card" tabindex="0" data-open="${p.id}"><div class="mini">${initials(p)}</div><strong>${String(i+1).padStart(2,'0')}</strong><h3>${p.name}</h3><p class="muted">${p.need}</p></article>`).join('')}
+function renderProducts(){const arr=list();qs('#count').textContent=`${arr.length} 個項目`;qs('#empty').classList.toggle('hide',arr.length>0);qs('#products').innerHTML=arr.map(p=>`<article class="product" data-open="${p.id}">${initials(p)}<div class="body"><div class="row"><span class="chip cat">${p.cat}</span><span class="score">${p.score}</span></div><h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="row"><span class="chip need">${p.need}</span><button class="btn ghost" type="button" data-open="${p.id}">看推薦理由</button></div></div></article>`).join('')}
+function renderCompare(){qs('#compareBody').innerHTML=products.slice().sort((a,b)=>b.score-a.score).map(p=>`<tr><td><strong>${p.name}</strong></td><td>${p.cat}</td><td>${p.best}</td><td>${p.pros[0]}</td><td>${p.cons[0]}</td><td><strong>${p.score}</strong></td></tr>`).join('')}
+function openModal(id){const p=products.find(x=>x.id===id);if(!p)return;qs('#mMark').textContent=p.mark;qs('#mCat').textContent=p.cat+' / '+p.need;qs('#modalTitle').textContent=p.name;qs('#mScore').textContent='推薦分數 '+p.score;qs('#mDesc').textContent=p.desc;qs('#mBest').textContent=p.best;qs('#mNot').textContent=p.not;qs('#mPros').innerHTML=p.pros.map(x=>`<li>${x}</li>`).join('');qs('#mCons').innerHTML=p.cons.map(x=>`<li>${x}</li>`).join('');qs('#mWhy').textContent=p.why;qs('#modal').classList.add('open');qs('#modal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function closeModal(){qs('#modal').classList.remove('open');qs('#modal').setAttribute('aria-hidden','true');document.body.style.overflow=''}
+document.addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open){openModal(open.dataset.open);return}if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.key==='Enter'||e.key===' ')&&document.activeElement?.dataset?.open){e.preventDefault();openModal(document.activeElement.dataset.open)}});
+qs('#q').addEventListener('input',e=>{state.q=e.target.value;renderProducts()});qs('#category').addEventListener('change',e=>{state.cat=e.target.value;renderProducts()});qs('#need').addEventListener('change',e=>{state.need=e.target.value;renderProducts()});qs('#sort').addEventListener('change',e=>{state.sort=e.target.value;renderProducts()});qs('#reset').addEventListener('click',()=>{state.q='';state.cat='全部';state.need='全部';state.sort='score-desc';qs('#q').value='';qs('#category').value='全部';qs('#need').value='全部';qs('#sort').value='score-desc';renderProducts()});renderOptions();renderTop();renderProducts();renderCompare();
 </script>
 </body>
 </html>
