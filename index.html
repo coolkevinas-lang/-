@@ -1,234 +1,1225 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- 作者：ChatGPT（OpenAI GPT-5 Codex） 版本：1.0  快捷鍵：WASD/方向鍵移動，1~6 行動，Space 確認 -->
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>科科💖紫荊甜蜜小天地</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://unpkg.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<meta name="theme-color" content="#ff9abf" />
+<title>弦界旅人：和聲之路</title>
 <style>
-  :root{ --rose:#ff79a8; --rose-2:#ffe0ec; --sky:#7bb2ff; --sky-2:#dfeaff; --ink:#1f2937; --card:#ffffff; --muted:#6b7280; --ring:#93c5fd; --shadow:0 16px 40px rgba(0,0,0,.10); --me:#ffffff; --you-start:#fff0f5; --you-end:#ffeaf1; }
-  *{box-sizing:border-box} html,body{height:100%}
-  body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Noto Sans, Arial; color:var(--ink); display:flex; flex-direction:column; align-items:center; overflow-x:hidden;
-    background: radial-gradient(1200px 760px at 8% -8%, var(--rose-2), transparent), radial-gradient(1000px 640px at 92% 8%, var(--sky-2), transparent), linear-gradient(165deg, #fff, #fbf8ff); transition: background 0.4s ease; }
-  body.theme-blue{ --rose:#7bb2ff; --sky:#6aa9ff; --rose-2:#dfeaff; --sky-2:#f0f7ff; --you-start:#eef6ff; --you-end:#e4f0ff; }
-  .bg-photo{position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center; opacity:.18; filter:saturate(110%) contrast(105%)}
-  .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:-1}
-  .hearts span{position:absolute; font-size:18px; opacity:.12; animation:float 14s linear infinite; filter:saturate(130%)}
-  .hearts span:nth-child(odd){opacity:.18} @keyframes float{ from{transform:translateY(110vh) rotate(0)} to{transform:translateY(-10vh) rotate(360deg)} }
-  .app{ position:relative; width:min(1000px,100%); min-height:100%; display:flex; flex-direction:column; border-radius:40px; background-clip:padding-box; }
-  header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)); border-bottom:1px solid #f0e7f3; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-radius:20px }
-  .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.5px} .brand .heart{font-size:20px}
-  .chip{padding:6px 10px; border-radius:999px; font-size:12px; background:#fff; border:1px solid #e5e7eb} .chip.ok{color:#16a34a; border-color:#16a34a} .chip.warn{color:#f59e0b; border-color:#f59e0b} .chip.bad{color:#ef4444; border-color:#ef4444}
-  .tabs{display:flex; gap:10px; align-items:center; padding:10px 16px} .tab{padding:10px 14px; border-radius:999px; font-weight:800; border:1px solid #e5e7eb; background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.06); cursor:pointer} .tab[disabled]{opacity:.5; cursor:not-allowed} .tab.active{background:linear-gradient(135deg,var(--sky),var(--rose)); color:#fff; border-color:transparent}
-  .grid{ display:grid; gap:16px; grid-template-columns:1fr; margin:0 16px 16px } @media(min-width:900px){ .grid{ grid-template-columns: .95fr 1.05fr } }
-  .card{ background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86)); border-radius:22px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.05); padding:18px; backdrop-filter: blur(8px); position:relative; overflow:hidden }
-  .sec-title{ font-weight:1000; font-size:14px; margin:6px 0 12px; letter-spacing:.5px; display:flex; align-items:center; gap:8px; z-index:2; position:relative } .sec-title:after{ content:"💞"; opacity:.7 }
-  label{ font-size:12px; color:var(--muted) } select,input[type=text]{ width:100%; padding:13px 16px; border-radius:16px; border:1px solid #e5e7eb; outline:none; font-size:14px; background:#fff }
-  select:focus,input[type=text]:focus{ border-color:var(--ring); box-shadow:0 0 0 4px rgba(147,197,253,.30) } .pill{ border-radius:999px }
-  button{ border:0; padding:12px 16px; border-radius:16px; font-weight:900; cursor:pointer; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--sky),var(--rose)); box-shadow:0 10px 22px rgba(0,0,0,.10) }
-  button.ghost{ background:#fff; color:#111; border:1px solid #e5e7eb; box-shadow:none } button.small{ padding:9px 12px; font-size:12px }
-  .row{ display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end } .row.center{ align-items:center } .muted{ color:var(--muted) } .divider{ height:1px; background:linear-gradient(90deg, #eee, #f6e9f1, #eee); margin:12px 0 }
-  .avatar{ width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:1000; color:#fff; background:linear-gradient(135deg,var(--rose),var(--sky)); box-shadow:0 8px 22px rgba(0,0,0,.12) }
-  .hidden{ display:none !重要 }
-  .watermark{position:absolute; bottom:8px; right:8px; width:90px; height:90px; background-size:cover; background-position:center; opacity:0.25; border-radius:12px; z-index:1}
-  .chat{ display:flex; flex-direction:column; min-height:500px; max-height:72vh; z-index:2; position:relative }
-  .log{ flex:1; overflow:auto; padding:14px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth }
-  .msgrow{ display:flex; gap:12px; align-items:flex-end } .msgrow.me{ justify-content:flex-end }
-  .bubble{ position:relative; max-width:78%; padding:13px 16px; border-radius:22px; background:#f8fafc; border:1px solid #eef2f7; box-shadow:0 6px 18px rgba(0,0,0,.06) }
-  .bubble:after{ content:""; position:absolute; bottom:-2px; width:18px; height:18px; transform:rotate(45deg); background:inherit; border:inherit }
-  .me .bubble{ background:#fff; border-color:#f0f0f0 } .me .bubble:after{ right:8px; border-left-color:transparent; border-top-color:transparent }
-  .you .bubble{ background:linear-gradient(180deg, var(--you-start), var(--you-end)); border-color:rgba(255,182,193,.45) } .you .bubble:after{ left:8px; border-right-color:transparent; border-top-color:transparent }
-  .meta{ font-size:11px; color:var(--muted); margin-top:6px; display:flex; gap:6px; align-items:center }
-  .img{ max-width:260px; border-radius:16px; display:block; box-shadow:0 6px 18px rgba(0,0,0,.08) }
-  .inputbar{ display:flex; gap:12px; padding:12px; background:linear-gradient(180deg,#fff,#fff8); border-top:1px solid #eee; border-bottom-left-radius:18px; border-bottom-right-radius:18px }
-  .inputbar input[type=file]{ display:none }
-  .msg{ flex:1; border:1px solid #e5e7eb; border-radius:999px; padding:13px 18px; font-size:15px; background:#fff }
-  .typing{ font-size:12px; color:var(--muted); margin-top:4px; height:16px }
-  footer{ text-align:center; color:var(--muted); font-size:12px; padding:10px 0 36px }
-  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:10px; font-size:12px; opacity:0; transition:opacity .25s ease; z-index:50}
-  .toast.show{opacity:.9}
+:root{
+  color-scheme: light dark;
+  --bg:#0f172a;
+  --panel:#111c33bb;
+  --panel-solid:#16213d;
+  --text:#f1f5f9;
+  --accent:#38bdf8;
+  --accent-soft:#0ea5e9;
+  --hp:#22c55e;
+  --en:#3b82f6;
+  --danger:#ef4444;
+  --warn:#facc15;
+  --delay:#a855f7;
+  --grid:#1e293b;
+}
+body{
+  margin:0;
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:radial-gradient(circle at 30% 20%,rgba(56,189,248,0.45),transparent 55%),
+             radial-gradient(circle at 70% 80%,rgba(139,92,246,0.35),transparent 55%),
+             linear-gradient(160deg,#020617,#0b1120 48%,#111c33 92%);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow:hidden;
+}
+main{
+  width: min(1200px, 100%);
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:10px clamp(8px,4vw,28px) 90px;
+  gap:10px;
+}
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:var(--panel);
+  border:1px solid rgba(148,163,184,.35);
+  border-radius:18px;
+  padding:12px clamp(12px,2vw,20px);
+  backdrop-filter:blur(16px) saturate(140%);
+}
+header h1{
+  margin:0;
+  font-size:clamp(18px,3vw,26px);
+  letter-spacing:2px;
+}
+header .info{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:13px;
+}
+.tag{padding:4px 10px;border-radius:999px;background:rgba(56,189,248,0.22);border:1px solid rgba(148,163,184,0.3);} 
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+button{
+  font-family:inherit;
+  font-weight:700;
+  border-radius:12px;
+  padding:9px 14px;
+  border:1px solid rgba(148,163,184,.35);
+  color:var(--text);
+  background:linear-gradient(135deg,rgba(56,189,248,0.65),rgba(14,165,233,0.28));
+  cursor:pointer;
+  transition:transform .15s ease, filter .2s;
+  min-width:70px;
+}
+button:hover{filter:brightness(1.15);}
+button:active{transform:translateY(1px) scale(.98);}
+button:disabled{opacity:.45; cursor:not-allowed; filter:none;}
+button.ghost{background:rgba(15,23,42,0.7);} 
+.app{
+  display:grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(320px, 0.45fr);
+  gap:12px;
+  flex:1;
+}
+canvas{
+  width:100%;
+  border-radius:18px;
+  background:var(--panel);
+  border:1px solid rgba(148,163,184,.3);
+}
+.panel{
+  background:var(--panel);
+  border-radius:18px;
+  border:1px solid rgba(148,163,184,.3);
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  font-size:13px;
+}
+.bar{height:10px;border-radius:999px;background:#1e293b;overflow:hidden;}
+.bar span{display:block;height:100%;background:var(--accent);}
+.bar.hp span{background:var(--hp);} .bar.en span{background:var(--en);} 
+.status-list{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;min-height:26px;}
+.status-chip{padding:3px 8px;border-radius:8px;background:rgba(148,163,184,.25);} 
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.actions.mobile{grid-template-columns:repeat(2,1fr);} 
+.actions button{min-height:46px;font-size:13px;}
+.log{
+  background:rgba(15,23,42,0.6);
+  border:1px solid rgba(148,163,184,.25);
+  border-radius:14px;
+  padding:10px;
+  height:200px;
+  overflow-y:auto;
+  font-size:13px;
+  line-height:1.4;
+}
+.log-entry{margin-bottom:6px;opacity:.92;}
+.inventory{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  font-size:12px;
+}
+.inv-item{padding:4px 8px;border-radius:8px;background:rgba(56,189,248,0.22);border:1px solid rgba(56,189,248,0.35);cursor:pointer;}
+.inv-item.empty{opacity:.4;background:transparent;border:dashed 1px rgba(148,163,184,.35);cursor:default;}
+.flex{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.small{font-size:12px;opacity:.9;}
+footer{
+  font-size:13px;
+  opacity:.8;
+  padding:12px 0 18px;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,0.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:30;
+}
+.card{
+  background:linear-gradient(160deg,#1d2a4a,#0f172a);
+  border:1px solid rgba(148,163,184,.4);
+  border-radius:18px;
+  padding:24px clamp(22px,4vw,32px);
+  max-width:420px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.char-opts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.char-card{flex:1 1 160px;background:rgba(15,23,42,.8);border:1px solid rgba(56,189,248,.35);border-radius:14px;padding:12px;cursor:pointer;transition:transform .18s ease, box-shadow .18s;}
+.char-card:hover{transform:translateY(-4px);} 
+.char-card.selected{box-shadow:0 0 0 2px rgba(56,189,248,.8);}
+.tagline{font-size:13px;line-height:1.5;opacity:.88;}
+.map-info{font-size:13px;opacity:.9;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.settings{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;}
+.toggle input{appearance:none;width:32px;height:18px;background:#334155;border-radius:999px;position:relative;outline:none;cursor:pointer;border:1px solid rgba(148,163,184,.3);} 
+.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#e2e8f0;transition:transform .25s ease, background .25s;} 
+.toggle input:checked{background:#0ea5e9;} 
+.toggle input:checked::after{transform:translateX(13px);background:white;} 
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:8px 14px;background:#0ea5e9;color:#0f172a;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:40;}
+.toast.show{opacity:1;}
+#virtual-pad{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,54px);gap:6px;z-index:15;}
+.virtual-btn{width:54px;height:54px;border-radius:18px;background:rgba(15,23,42,.75);border:1px solid rgba(148,163,184,.4);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text);}
+#virtual-pad .virtual-btn.confirm{grid-column:2 / span 1;grid-row:2;}
+.mobile-only{display:none;}
+@media(max-width:960px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto;}
+  main{padding-bottom:160px;}
+}
+@media(max-width:640px){
+  .actions{grid-template-columns:repeat(2,1fr);}
+  .mobile-only{display:block;}
+}
+.tutorial{
+  margin-top:18px;
+  display:grid;
+  gap:10px;
+  background:rgba(15,23,42,.6);
+  border-radius:16px;
+  border:1px solid rgba(148,163,184,.25);
+  padding:16px;
+}
+.tutorial h2{margin:0 0 6px;font-size:16px;letter-spacing:1px;}
+.tutorial ol{margin:0;padding-left:20px;font-size:13px;line-height:1.6;}
 </style>
 </head>
 <body>
-  <div class="bg-photo" id="bgPhoto" aria-hidden="true"></div>
-  <div class="hearts" aria-hidden="true">
-    <span style="left:5%; animation-delay:0s">💗</span><span style="left:18%; animation-delay:2s">💖</span><span style="left:33%; animation-delay:4s">💘</span><span style="left:55%; animation-delay:1s">💞</span><span style="left:72%; animation-delay:3s">💕</span><span style="left:87%; animation-delay:5s">💓</span>
-  </div>
-
-  <div class="app">
-    <header>
-      <div class="brand"><span class="heart">💖</span>科科💖紫荊甜蜜小天地</div>
-      <div class="row center">
-        <button id="themeBtn" class="small ghost" title="切換主題">主題：粉/藍</button>
-        <button id="soundBtn" class="small ghost" title="啟用提示音">提示音：關</button>
-        <label for="bgFile" class="chip" style="cursor:pointer">自選背景</label>
-        <input id="bgFile" type="file" accept="image/*" style="display:none" />
-        <span id="statusChip" class="chip bad">未連線</span><span class="chip ok" title="WebRTC DTLS">已加密</span>
-      </div>
-    </header>
-
-    <div class="tabs">
-      <button id="tabConnect" class="tab active">① 連線</button>
-      <button id="tabChat" class="tab" disabled>② 聊天</button>
+<main>
+  <header>
+    <div>
+      <h1>弦界旅人：和聲之路</h1>
+      <div class="map-info" id="mapInfo">區域：— / 進度 0%</div>
     </div>
-
-    <section id="page-connect" class="grid">
-      <div class="card">
-        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAH0B6ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AKuKKKAP//Z')"></div>
-        <div class="sec-title">連線設定</div>
-        <div class="row">
-          <div style="flex:1">
-            <label>我的暱稱</label>
-            <select id="nick" class="pill"><option value="科科寶貝">科科寶貝</option><option value="紫荊寶貝">紫荊寶貝</option></select>
-          </div>
-          <div style="flex:1">
-            <label>我的ID（分享給對方）</label>
-            <input id="myId" class="pill" type="text" readonly />
-          </div>
-          <button id="copyId" class="small ghost">複製ID</button>
+    <div class="controls">
+      <button id="downloadSave">下載存檔</button>
+      <label class="toggle">音效<input type="checkbox" id="toggleSound"></label>
+      <label class="toggle">動效減弱<input type="checkbox" id="toggleMotion"></label>
+      <button id="restartBtn" class="ghost">重新開始</button>
+      <label class="toggle">載入<input type="file" id="uploadSave" accept="application/json" style="display:none"></label>
+    </div>
+  </header>
+  <div class="app">
+    <canvas id="mapCanvas" width="480" height="480" aria-label="區域地圖"></canvas>
+    <div class="panel" id="rightPanel">
+      <div class="flex">
+        <div>
+          <div id="charName">旅人</div>
+          <div class="small" id="charPassive">被動：</div>
         </div>
-        <div class="divider"></div>
-        <div class="row">
-          <div style="flex:1">
-            <label>對方ID（向對方索取並貼上）</label>
-            <input id="peerId" class="pill" type="text" placeholder="輸入對方ID後按『連線』" />
-          </div>
-          <button id="connectBtn">連線</button>
-        </div>
-        <div class="muted" id="tip" style="margin-top:8px">狀態：待連線</div>
-        <div class="typing" id="typing"> </div>
+        <div class="small" id="roundInfo">回合 0</div>
       </div>
-    </section>
-
-    <section id="page-chat" class="grid hidden">
-      <div class="card" style="grid-column:1/-1">
-        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCB6AqQDACIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AIPRRRQAH//Z')"></div>
-        <div class="sec-title">聊天</div>
-        <div class="chat">
-          <div id="log" class="log"></div>
-          <div class="inputbar">
-            <label for="imgFile" class="chip" style="cursor:pointer">＋圖片</label>
-            <input id="imgFile" type="file" accept="image/*" capture="environment" />
-            <input id="msg" class="msg" type="text" placeholder="輸入訊息…（Enter送出；輸入 ♥ 自動變愛心貼圖)" />
-            <button id="sendBtn">送出</button>
-          </div>
+      <div class="stat-grid">
+        <div>
+          <div>HP <span id="hpVal">0</span></div>
+          <div class="bar hp"><span id="hpBar" style="width:0%"></span></div>
+        </div>
+        <div>
+          <div>EN <span id="enVal">0</span></div>
+          <div class="bar en"><span id="enBar" style="width:0%"></span></div>
+        </div>
+        <div>
+          <div>ATK <span id="atkVal">0</span></div>
+          <div>DEF <span id="defVal">0</span></div>
+        </div>
+        <div>
+          <div>ACC <span id="accVal">0</span></div>
+          <div>EVA <span id="evaVal">0</span></div>
+        </div>
+        <div>
+          <div>暴擊 <span id="critVal">0%</span></div>
+          <div>敵方 HP <span id="enemyHP">—</span></div>
         </div>
       </div>
-    </section>
-
-    <footer>WebRTC 端到端加密｜若無法連線，請確認使用 GitHub Pages 的 https 網址並稍後重試</footer>
+      <div class="status-list" id="statusList"></div>
+      <div class="actions" id="actionButtons"></div>
+      <div class="inventory" id="inventory"></div>
+      <div class="log" id="log"></div>
+    </div>
   </div>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+  <div class="tutorial">
+    <h2>新手小教學</h2>
+    <ol>
+      <li>使用地圖節點前進探索弦界，WASD / 方向鍵或虛擬方向前進。</li>
+      <li>碰到戰鬥節點會與失衡生物遭遇，選擇六種行動之一應對。</li>
+      <li>善用道具「節拍器」提升命中，解除「失調」後命中率大幅回復。</li>
+      <li>擊倒最終 Boss「失調大師」，修復和聲殿，完成和聲之路。</li>
+      <li>可隨時重新開始或下載/上傳存檔，延續旅程。</li>
+    </ol>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+<div id="virtual-pad" class="mobile-only" aria-hidden="true">
+  <div class="virtual-btn" data-key="ArrowUp">▲</div>
+  <div class="virtual-btn" data-key="Space">◎</div>
+  <div class="virtual-btn" data-key="ArrowRight">▶</div>
+  <div class="virtual-btn" data-key="ArrowLeft">◀</div>
+  <div class="virtual-btn confirm" data-key="Space">確認</div>
+  <div class="virtual-btn" data-key="ArrowDown">▼</div>
+</div>
+<div class="overlay" id="charSelect">
+  <div class="card">
+    <h2>選擇旅人</h2>
+    <p class="tagline">音律扭曲了弦界，唯有樂者能調和。選擇旅人，踏上和聲之路。</p>
+    <div class="char-opts">
+      <div class="char-card" data-id="璃">
+        <h3>琴者·璃</h3>
+        <p>偏支援 / 被動：開場獲得 1 層和聲護盾。<br>必殺「溫柔分解」：清除負面狀態並回復 EN（冷卻 3）。</p>
+      </div>
+      <div class="char-card" data-id="科">
+        <h3>弦客·科</h3>
+        <p>偏輸出 / 被動：首回合命中提高。<br>必殺「脈衝強擊」：下回合必中且必定暴擊（冷卻 3）。</p>
+      </div>
+    </div>
+    <button id="confirmChar" disabled>啟程</button>
+  </div>
+</div>
 <script>
-// ===== DOM 快捷 =====
-const $=(q)=>document.querySelector(q);
-const statusChip=$('#statusChip'), tip=$('#tip'), myIdEl=$('#myId'), peerIdEl=$('#peerId'), msgEl=$('#msg');
-const imgFileEl=$('#imgFile'), nickEl=$('#nick'), tabConnect=$('#tabConnect'), tabChat=$('#tabChat');
-const pageConnect=$('#page-connect'), pageChat=$('#page-chat'), typingEl=$('#typing');
-const logEl=document.querySelector('#log');
-function showConnect(){tabConnect.classList.add('active');tabChat.classList.remove('active');pageConnect.classList.remove('hidden');pageChat.classList.add('hidden');}
-function showChat(){tabChat.classList.add('active');tabConnect.classList.remove('active');pageChat.classList.remove('hidden');pageConnect.classList.add('hidden');}
-tabConnect.onclick=showConnect; tabChat.onclick=()=>{ if(!tabChat.disabled) showChat(); };
-
-// ===== 主題/提示音/背景 =====
-const themeBtn=$('#themeBtn'), soundBtn=$('#soundBtn'), bgFileEl=$('#bgFile'), bgPhoto=$('#bgPhoto');
-let audioEnabled=false, ac=null; function ensureAC(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); }
-function beep(kind='msg'){ if(!audioEnabled) return; ensureAC(); const o=ac.createOscillator(), g=ac.createGain(); o.type='sine'; o.frequency.value=(kind==='connect')?880:(kind==='send'?660:520); g.gain.value=0.0001; o.connect(g); g.connect(ac.destination); const t=ac.currentTime; g.gain.exponentialRampToValueAtTime(0.04,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.15); o.start(); o.stop(t+0.16); }
-soundBtn.onclick=()=>{ audioEnabled=!audioEnabled; if(audioEnabled){ ensureAC(); beep('connect'); soundBtn.textContent='提示音：開'; } else soundBtn.textContent='提示音：關'; };
-(function(){ const saved=localStorage.getItem('sweet.theme')||'rose'; if(saved==='blue') document.body.classList.add('theme-blue'); })();
-function toggleTheme(){ document.body.classList.toggle('theme-blue'); const m=document.body.classList.contains('theme-blue')?'blue':'rose'; localStorage.setItem('sweet.theme',m); }
-themeBtn.onclick=toggleTheme; bgFileEl.onchange=()=>{ const f=bgFileEl.files?.[0]; if(!f) return; const url=URL.createObjectURL(f); bgPhoto.style.backgroundImage=`url(${url})`; };
-
-// ===== UI 工具 =====
-function setStatus(t,cls){ statusChip.textContent=t; statusChip.className='chip '+(cls||''); }
-function setTip(t){ tip.textContent='狀態：'+t; }
-function now(){ const d=new Date(); const p=n=>String(n).padStart(2,'0'); return `${p(d.getHours())}:${p(d.getMinutes())}`; }
-function esc(s){ return s.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-function addMsg(who,html){ const row=document.createElement('div'); row.className='msgrow '+who; const avatar=`<div class="avatar">${who==='me'?(nickEl.value||'我')[0]:'❤'}</div>`; const bubble=`<div><div class="bubble">${html}</div><div class="meta">${who==='me'?'我':'對方'} · ${now()}</div></div>`; row.innerHTML = who==='me'? `${bubble}${avatar}` : `${avatar}${bubble}`; logEl.appendChild(row); logEl.scrollTop=logEl.scrollHeight; }
-
-// ===== Toast =====
-const toastEl = document.getElementById('toast');
-function toast(msg,ms=1200){ toastEl.textContent=msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), ms); }
-
-// ===== 可靠的複製：Clipboard API → execCommand → prompt =====
-async function copyText(text){
-  // 1) 嘗試 Clipboard API（需 https + 使用者手勢 + 站點允許）
-  try{
-    if(navigator.clipboard && window.isSecureContext){
-      await navigator.clipboard.writeText(text);
-      toast('已複製 ID');
-      return true;
+(function(){
+'use strict';
+const CONFIG={
+  VERSION:'1.0',
+  HIT_MIN:0.2,
+  HIT_MAX:0.95,
+  CRIT_MULT:1.5,
+  BASE_CRIT:0.1,
+  ACTION_COST:{BASE:5,TUNE:4,SHIELD:6,SPREAD:8},
+  EN_REGEN:3,
+  PLAYER_MAX_LEVEL:20,
+  ANIM_DURATION:300
+};
+const DATA={
+  areas:[
+    {id:'forest',name:'清音林',nodes:5,theme:'#38bdf8',type:'tutorial',events:['battle','battle','rest','battle','elite']},
+    {id:'cave',name:'回響洞',nodes:4,theme:'#facc15',events:['battle','hazard','battle','elite']},
+    {id:'plain',name:'交錯平原',nodes:6,theme:'#fb7185',events:['battle','trial','battle','battle','rest','elite']},
+    {id:'spire',name:'共振峰',nodes:5,theme:'#34d399',events:['hazard','battle','battle','elite','rest']},
+    {id:'hall',name:'和聲殿',nodes:4,theme:'#a855f7',events:['battle','hazard','battle','boss']}
+  ],
+  enemies:{
+    forest:[{id:'sparrow',name:'拍落鳥',hp:40,en:15,atk:10,def:3,acc:70,eva:20,crit:0.05,passive:'偶爾使玩家遲拍',tags:['delay']}],
+    cave:[{id:'echo',name:'回聲影',hp:48,en:20,atk:12,def:4,acc:75,eva:15,crit:0.08,passive:'受擊時20%反施失調',tags:['disrupt']}],
+    plain:[{id:'lowbeast',name:'低頻獸',hp:62,en:18,atk:14,def:7,acc:68,eva:12,crit:0.1,passive:'偶發殘響灼',tags:['burn']}],
+    spire:[{id:'phantom',name:'狂想靈',hp:54,en:20,atk:16,def:5,acc:78,eva:18,crit:0.12,passive:'偷取少量 EN',tags:['drain']}],
+    hall:[
+      {id:'chorus',name:'和聲侍衛',hp:72,en:24,atk:17,def:7,acc:82,eva:16,crit:0.1,passive:'以共鳴擾亂命中',tags:['disrupt']},
+      {id:'boss',name:'失調大師',hp:120,en:40,atk:22,def:9,acc:85,eva:18,crit:0.12,passive:'堆疊失調，半血後殘響',tags:['boss']}
+    ]
+  },
+  upgrades:[
+    {id:'atk1',text:'音強強化：ATK +5',effect:s=>s.atk+=5},
+    {id:'def1',text:'護音增幅：DEF +3',effect:s=>s.def+=3},
+    {id:'acc1',text:'對準訓練：ACC +8',effect:s=>s.acc+=8},
+    {id:'eva1',text:'飄移訣竅：EVA +6',effect:s=>s.eva+=6},
+    {id:'crit',text:'首擊奏鳴：戰鬥開始前首擊必命中一次',effect:s=>s.passives.push('sureStrike')},
+    {id:'shield',text:'護盾迴響：每戰開始獲得護盾 8',effect:s=>s.passives.push('extraShield')}
+  ],
+  items:[
+    {id:'resonStone',name:'共鳴石',desc:'下次普攻附加真實傷害 3。',effect:'stone'},
+    {id:'metronome',name:'節拍器',desc:'2 回合 ACC ↑20。',effect:'metronome'},
+    {id:'silentBell',name:'靜音鈴',desc:'解除殘響灼。',effect:'bell'},
+    {id:'pureDew',name:'清音露',desc:'解除遲拍並回復 EN 8。',effect:'dew'}
+  ]
+};
+const INITIAL_STATS={
+  璃:{name:'琴者·璃',hp:80,en:60,atk:14,def:6,acc:80,eva:18,crit:0.12,passive:'開場獲得 1 層和聲護盾',ultimate:'溫柔分解',role:'support'},
+  科:{name:'弦客·科',hp:86,en:50,atk:18,def:4,acc:75,eva:20,crit:0.15,passive:'首回合命中提高',ultimate:'脈衝強擊',role:'attack'}
+};
+function seedRandom(seed){
+  let a=seed>>>0;
+  return {
+    next(){
+      a=(a*1664525+1013904223)>>>0;
+      return a/4294967296;
+    },
+    nextRange(min,max){return min+(max-min)*this.next();},
+    pick(arr){return arr[Math.floor(this.next()*arr.length)];},
+    get seed(){return a>>>0;}
+  };
+}
+const storageKey='stringRealmSave';
+let ac=null,soundOn=false,reducedMotion=false;
+function ensureAudio(){
+  if(!ac){
+    const C=window.AudioContext||window.webkitAudioContext;
+    if(C) ac=new C();
+  }
+  return ac;
+}
+function playTone(freq=440,dur=0.15,type='sine'){
+  if(!soundOn) return;
+  const ctx=ensureAudio();
+  if(!ctx) return;
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+  osc.type=type;
+  osc.frequency.value=freq;
+  gain.gain.setValueAtTime(0.0001,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.05,ctx.currentTime+0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+dur);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime+dur+0.02);
+}
+const toastEl=document.getElementById('toast');
+function toast(msg){
+  toastEl.textContent=msg;
+  toastEl.classList.add('show');
+  setTimeout(()=>toastEl.classList.remove('show'),1200);
+}
+class Entity{
+  constructor(stats){
+    this.name=stats.name;
+    this.maxHp=stats.hp;
+    this.hp=stats.hp;
+    this.maxEn=stats.en||50;
+    this.en=stats.en||50;
+    this.atk=stats.atk;
+    this.def=stats.def;
+    this.acc=stats.acc;
+    this.eva=stats.eva||10;
+    this.crit=stats.crit||0.1;
+    this.passive=stats.passive||'';
+    this.ultimate=stats.ultimate||'';
+    this.cooldown=0;
+    this.status={};
+    this.buffs={crit:0,acc:0,stone:false,sureStrike:false,shield:0};
+  }
+  reset(temp={}){
+    this.hp=Math.min(this.maxHp,temp.hp??this.maxHp);
+    this.en=Math.min(this.maxEn,temp.en??this.maxEn);
+    this.status={};
+    this.buffs={crit:0,acc:0,stone:false,sureStrike:false,shield:temp.shield||0};
+    this.cooldown=0;
+  }
+}
+class Inventory{
+  constructor(){
+    this.items=[];
+  }
+  add(id){
+    if(this.items.length<6) this.items.push(id);
+  }
+  remove(index){
+    this.items.splice(index,1);
+  }
+}
+class BattleSystem{
+  constructor(game){
+    this.game=game;
+    this.inBattle=false;
+    this.enemy=null;
+    this.turn=0;
+    this.enemyPhase=1;
+  }
+  startBattle(area,event){
+    const rng=this.game.rng;
+    const areaEnemies=DATA.enemies[this.game.currentArea.id]||DATA.enemies.forest;
+    let pool;
+    if(event==='boss'){
+      pool=areaEnemies.filter(e=>e.tags?.includes('boss'));
+    }else{
+      pool=areaEnemies.filter(e=>!e.tags?.includes('boss'));
+      if(pool.length===0) pool=areaEnemies;
     }
-  }catch(e){ /* 可能被 Permissions-Policy 擋住 */ }
-  // 2) 傳統備援：選取隱藏 textarea + execCommand
-  try{
-    const ta=document.createElement('textarea');
-    ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-1000px';
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    const ok=document.execCommand && document.execCommand('copy');
-    document.body.removeChild(ta);
-    if(ok){ toast('已複製 ID'); return true; }
-  }catch(e){ /* ignore */ }
-  // 3) 最終退路：顯示手動複製提示
-  window.prompt('無法自動複製，請手動複製此 ID：', text);
-  return false;
+    let template=pool.length?rng.pick(pool):areaEnemies[0];
+    this.enemy=new Entity({...template});
+    if(event==='elite'){
+      this.enemy.maxHp+=20;this.enemy.hp+=20;this.enemy.atk+=4;
+      this.enemy.name+='·強化';
+    }
+    this.turn=1;
+    this.enemyPhase=1;
+    this.inBattle=true;
+    this.enemy.status={};
+    this.enemy.buffs={crit:0,acc:0,stone:false,shield:0,sureStrike:false};
+    const prevShield=this.game.player.buffs?.shield||0;
+    this.game.player.reset({hp:this.game.player.hp,en:this.game.player.en,shield:prevShield});
+    if(this.game.player.passive.includes('護盾')) this.game.player.buffs.shield=10;
+    if(this.game.playerChoice==='璃') this.game.player.buffs.shield=Math.max(this.game.player.buffs.shield,12);
+    this.game.player.status={};
+    if(this.game.player.passives?.includes('extraShield')) this.game.player.buffs.shield+=8;
+    if(this.game.player.passives?.includes('sureStrike')) this.game.player.buffs.sureStrike=true;
+    if(this.game.playerChoice==='科') this.game.player.buffs.acc=this.turn===1?20:0;
+    this.log(`遭遇 ${this.enemy.name}！${template.passive}`);
+    playTone(660,0.2,'triangle');
+    this.updateUI();
+  }
+  log(msg){this.game.log(msg);}
+  endBattle(win){
+    this.inBattle=false;
+    if(win){
+      this.log('戰鬥勝利！');
+      playTone(880,0.3,'sawtooth');
+      this.game.stats.wins++;
+      this.game.stats.streak++;
+      this.game.stats.bestStreak=Math.max(this.game.stats.bestStreak||0,this.game.stats.streak);
+      this.game.stats.totalEnemies++;
+      this.game.onBattleWin();
+    }else{
+      this.log('旅程結束，弦界仍失衡…');
+      this.game.gameOver();
+    }
+  }
+  applyDamage(target,amount){
+    let shield=target.buffs.shield||0;
+    if(shield>0){
+      const absorb=Math.min(shield,amount);
+      target.buffs.shield-=absorb;
+      amount-=absorb;
+      this.log(`${target.name} 的護盾抵擋 ${absorb}`);
+    }
+    if(amount<=0) return;
+    target.hp=Math.max(0,target.hp-amount);
+  }
+  hitCheck(attacker,defender){
+    const acc=attacker.acc+(attacker.buffs?.acc||0);
+    const hit=acc/(acc+defender.eva);
+    const clamp=Math.max(CONFIG.HIT_MIN,Math.min(CONFIG.HIT_MAX,hit));
+    return {roll:this.game.rng.next(),chance:clamp};
+  }
+  attack(attacker,defender,baseCrit=CONFIG.BASE_CRIT){
+    const roll=this.hitCheck(attacker,defender);
+    if(attacker.buffs?.sureStrike){
+      attacker.buffs.sureStrike=false;
+      roll.roll=0;
+    }
+    if(roll.roll>roll.chance){
+      this.log(`${attacker.name} 未命中！（機率 ${(roll.chance*100).toFixed(0)}%）`);
+      return {hit:false};
+    }
+    let critChance=baseCrit+(attacker.crit||0)+(attacker.buffs?.crit||0);
+    if(attacker.status?.spreadCrit) critChance+=0.2;
+    critChance=Math.min(0.95,critChance);
+    const crit= this.game.rng.next()<critChance;
+    const variance=this.game.rng.nextRange(0.85,1.15);
+    let dmg=Math.max(1,Math.round(attacker.atk*variance-defender.def));
+    if(crit) dmg=Math.round(dmg*CONFIG.CRIT_MULT);
+    this.applyDamage(defender,dmg);
+    if(attacker.buffs?.stone){
+      defender.hp=Math.max(0,defender.hp-3);
+      this.log('共鳴石爆響造成真實傷害 3');
+      attacker.buffs.stone=false;
+    }
+    this.log(`${attacker.name} 造成 ${dmg}${crit?' 暴擊！':''}`);
+    return {hit:true,crit};
+  }
+  consumeEN(entity,cost){
+    if(entity.en<cost){
+      this.log('能量不足！');
+      return false;
+    }
+    entity.en-=cost;
+    return true;
+  }
+  applyOversoundPenalty(){
+    const player=this.game.player;
+    if(!player.status.oversound) return true;
+    const backlash=3;
+    this.game.stats.overHits++;
+    this.applyDamage(player,backlash);
+    this.log('過音反噬造成 3 傷害！');
+    if(player.hp<=0){ this.endBattle(false); return false; }
+    return true;
+  }
+  playerAction(type){
+    if(!this.inBattle) return;
+    const player=this.game.player;
+    if(type==='base'){
+      if(!this.consumeEN(player,CONFIG.ACTION_COST.BASE)) return;
+      if(!this.applyOversoundPenalty()) return;
+      player.en+=CONFIG.EN_REGEN;
+      if(player.en>player.maxEn) player.en=player.maxEn;
+      this.attack(player,this.enemy);
+      if(this.game.playerChoice==='科'){ player.buffs.crit=0; }
+      if(this.enemy.tags.includes('delay') && this.game.rng.next()<0.2){
+        player.status.lag=2;
+        this.log('拍落鳥使你「遲拍」！');
+      }
+      this.endTurn();
+    }else if(type==='tune'){
+      if(!this.consumeEN(player,CONFIG.ACTION_COST.TUNE)) return;
+      if(!this.applyOversoundPenalty()) return;
+      player.buffs.acc= (player.buffs.acc||0)+15;
+      if(player.status.detune){ delete player.status.detune; this.log('失調已校正。'); }
+      if(this.game.rng.next()<0.3 && player.status.lag){ delete player.status.lag; this.log('節奏回穩，解除遲拍！'); }
+      this.log('ACC 提升！');
+      this.endTurn();
+    }else if(type==='shield'){
+      if(!this.consumeEN(player,CONFIG.ACTION_COST.SHIELD)) return;
+      if(!this.applyOversoundPenalty()) return;
+      player.buffs.shield=(player.buffs.shield||0)+12;
+      player.en=Math.min(player.maxEn,player.en+6);
+      this.log('節奏護壁減傷，EN 回復。');
+      this.endTurn();
+    }else if(type==='spread'){
+      if(!this.consumeEN(player,CONFIG.ACTION_COST.SPREAD)) return;
+      if(!this.applyOversoundPenalty()) return;
+      player.status.spreadCrit=2;
+      if(this.game.rng.next()<0.25){
+        this.enemy.status.detune=2;
+        this.log('敵方陷入失調！');
+      }
+      this.log('和聲擴散：暴擊機率上升。');
+      this.endTurn();
+    }else if(type==='ultimate'){
+      if(player.cooldown>0){ this.log('必殺尚未冷卻。'); return; }
+      if(!this.applyOversoundPenalty()) return;
+      if(this.game.playerChoice==='璃'){
+        player.status={};
+        player.en=Math.min(player.maxEn,player.en+12);
+        player.cooldown=3;
+        this.log('溫柔分解：驅散負面並回復 EN。');
+      }else{
+        player.buffs.sureStrike=true;
+        player.buffs.crit=(player.buffs.crit||0)+0.5;
+        player.cooldown=3;
+        this.log('脈衝強擊：下回合必中且必暴擊。');
+      }
+      this.endTurn();
+    }else if(type.startsWith('item:')){
+      const idx=Number(type.split(':')[1]);
+      this.useItem(idx);
+    }
+    this.updateUI();
+  }
+  useItem(idx){
+    const inv=this.game.inventory;
+    if(idx>=inv.items.length) return;
+    const id=inv.items[idx];
+    const player=this.game.player;
+    if(!this.applyOversoundPenalty()) return;
+    const item=DATA.items.find(i=>i.id===id);
+    if(!item) return;
+    switch(item.effect){
+      case 'stone':
+        player.buffs.stone=true;
+        this.log('共鳴石待命，下次普攻附加真實傷害。');
+        break;
+      case 'metronome':
+        player.buffs.acc=(player.buffs.acc||0)+20;
+        player.buffs.metronomeStacks=(player.buffs.metronomeStacks||0)+1;
+        player.status.metronome=(player.status.metronome||0)+2;
+        this.log('節拍器：ACC 大幅提升。');
+        break;
+      case 'bell':
+        if(player.status.burn){delete player.status.burn;this.log('殘響灼被靜音鈴消除。');}
+        break;
+      case 'dew':
+        if(player.status.lag){delete player.status.lag;}
+        player.en=Math.min(player.maxEn,player.en+8);
+        this.log('清音露：解除遲拍並回 EN。');
+        break;
+    }
+    inv.remove(idx);
+    this.endTurn();
+  }
+  enemyTurn(){
+    if(!this.inBattle || this.enemy.hp<=0) return;
+    const enemy=this.enemy;
+    const player=this.game.player;
+    if(this.enemy.tags.includes('drain') && this.game.rng.next()<0.35){
+      const steal=5;
+      player.en=Math.max(0,player.en-steal);
+      enemy.en=Math.min(enemy.maxEn,(enemy.en||0)+steal);
+      this.log('狂想靈偷取你的 EN！');
+    }
+    if(this.enemy.tags.includes('boss') && this.enemy.hp<=this.enemy.maxHp/2 && this.enemyPhase===1){
+      this.enemyPhase=2;
+      this.log('失調大師轉入第二樂章，殘響席捲！');
+      enemy.status.resonance=3;
+    }
+    const atk= this.attack(enemy,player);
+    if(atk.hit){
+      if(this.enemy.tags.includes('disrupt') && this.game.rng.next()<0.2){
+        player.status.detune=2; this.log('失調回擊！');
+      }
+      if(this.enemy.tags.includes('burn') && this.game.rng.next()<0.2){
+        player.status.burn=3; this.log('殘響灼附著！');
+      }
+      if(this.enemy.tags.includes('delay') && this.game.rng.next()<0.2){
+        player.status.lag=2; this.log('被迫遲拍！');
+      }
+      if(this.enemy.tags.includes('boss')){
+        player.status.detune=(player.status.detune||0)+1;
+        this.log('失調層堆疊。');
+        if(this.enemyPhase===2){
+          player.status.burn=2;
+          this.log('大範圍殘響灼灼燒！');
+        }
+      }
+      if(this.game.rng.next()<0.2){
+        player.status.oversound=Math.max(player.status.oversound||0,2);
+        this.log('音波回震造成「過音」！');
+      }
+    }
+    if(player.hp<=0){
+      this.endBattle(false);
+    }
+  }
+  upkeep(){
+    const player=this.game.player;
+    const enemy=this.enemy;
+    const tick=(entity,key,{perTurn,expire}={})=>{
+      if(!entity.status[key]) return;
+      perTurn?.();
+      entity.status[key]--;
+      if(entity.status[key]<=0){
+        delete entity.status[key];
+        expire?.();
+      }
+    };
+    tick(player,'burn',{perTurn:()=>{
+      player.hp=Math.max(0,player.hp-4);
+      this.game.stats.burnHits++;
+      this.log('殘響灼灼痛 -4 HP');
+    }});
+    tick(player,'detune',{perTurn:()=>{
+      player.buffs.acc=Math.max(0,(player.buffs.acc||0)-5);
+      this.log('失調影響命中。');
+    }});
+    tick(player,'lag',{perTurn:()=>{this.log('遲拍延緩行動。');}});
+    tick(player,'spreadCrit');
+    tick(player,'oversound');
+    tick(player,'metronome',{expire:()=>{
+      if(player.buffs.metronomeStacks){
+        player.buffs.acc=Math.max(0,player.buffs.acc-20*player.buffs.metronomeStacks);
+        player.buffs.metronomeStacks=0;
+        this.log('節拍器效果結束。');
+      }
+    }});
+    tick(enemy,'detune');
+    tick(enemy,'resonance',{perTurn:()=>{
+      if(this.game.rng.next()<0.3){
+        player.status.detune=(player.status.detune||0)+1;
+        this.log('共振餘音擾亂你的調性。');
+      }
+    }});
+    if(player.hp<=0){
+      this.endBattle(false);
+    }
+  }
+  endTurn(skipEnemy){
+    const player=this.game.player;
+    this.turn++;
+    if(player.cooldown>0) player.cooldown--;
+    if(!skipEnemy) this.enemyTurn();
+    if(this.enemy.hp<=0){
+      this.endBattle(true);
+      return;
+    }
+    if(this.inBattle){
+      this.upkeep();
+      this.updateUI();
+      this.log(`輪到你行動。`);
+    }
+  }
+  updateUI(){
+    this.game.updateHUD();
+  }
 }
-
-// 讓輸入框點一下全選，方便手動複製
-myIdEl.addEventListener('click',()=>{ myIdEl.select(); myIdEl.setSelectionRange(0, 99999); });
-
-// ===== PeerJS 載入與連線 =====
-const ICE_SERVERS=[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun.cloudflare.com:3478'] }];
-const PeerCDNs=['https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js','https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js','https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js'];
-function loadScriptSeq(urls){return new Promise((res,rej)=>{let i=0;const next=()=>{if(i>=urls.length) return rej();const s=document.createElement('script');s.src=urls[i++];s.async=true;s.onload=res;s.onerror=()=>{s.remove();next();};document.head.appendChild(s);};next();});}
-
-let peer=null, conn=null;
-(async()=>{try{await loadScriptSeq(PeerCDNs);}catch(e){ setStatus('信令失敗','warn'); setTip('CDN 無法載入，請換網路或稍後再試'); return; }
-  peer=new Peer({config:{iceServers:ICE_SERVERS}});
-  peer.on('open',id=>{ myIdEl.value=id; setStatus('就緒（待連線）','warn'); setTip('互換ID，貼上對方ID後按連線'); });
-  peer.on('connection',c=>{ if(conn){ c.close(); return; } conn=c; wireConn(); });
-  peer.on('error',e=>{ console.error(e); setStatus('錯誤','bad'); setTip(String(e)); });
-})();
-
-function wireConn(){
-  setStatus('連線中…','warn'); setTip('建立 P2P');
-  conn.on('open',()=>{ setStatus('已連線','ok'); setTip('開始聊天吧！'); tabChat.disabled=false; showChat(); beep('connect'); });
-  conn.on('data',d=>{
-    if(d instanceof Blob || d instanceof ArrayBuffer){ const b=d instanceof Blob? d: new Blob([d]); const url=URL.createObjectURL(b); addMsg('you',`<img class=img src="${url}">`); beep('msg'); return; }
-    addMsg('you', esc(String(d)).replace(/♥/g,'💖')); beep('msg');
-  });
-  conn.on('close',()=>{ setStatus('已斷線','bad'); setTip('連線已關閉'); });
-  conn.on('error',e=>{ setStatus('錯誤','bad'); setTip(String(e)); });
+class SceneMap{
+  constructor(game){
+    this.game=game;
+    this.canvas=document.getElementById('mapCanvas');
+    this.ctx=this.canvas.getContext('2d');
+    this.last=0;
+  }
+  draw(timestamp){
+    const ctx=this.ctx;
+    const width=this.canvas.width;
+    const height=this.canvas.height;
+    ctx.clearRect(0,0,width,height);
+    const area=this.game.currentArea;
+    if(!area){
+      ctx.fillStyle='rgba(148,163,184,0.2)';
+      ctx.fillRect(0,0,width,height);
+      return;
+    }
+    ctx.fillStyle='rgba(15,23,42,0.65)';
+    ctx.fillRect(0,0,width,height);
+    const nodes=area.nodes;
+    const margin=60;
+    const spacing=(width-2*margin)/(nodes-1);
+    ctx.strokeStyle='rgba(148,163,184,0.4)';
+    ctx.lineWidth=4;
+    ctx.beginPath();
+    for(let i=0;i<nodes-1;i++){
+      ctx.moveTo(margin+i*spacing,height/2);
+      ctx.lineTo(margin+(i+1)*spacing,height/2);
+    }
+    ctx.stroke();
+    const progress=this.game.areaProgress;
+    for(let i=0;i<nodes;i++){
+      const x=margin+i*spacing;
+      const y=height/2;
+      const completed=i<progress;
+      ctx.fillStyle=completed?area.theme:'rgba(148,163,184,0.25)';
+      ctx.beginPath();
+      ctx.arc(x,y,18,0,Math.PI*2);
+      ctx.fill();
+      if(i===progress){
+        ctx.strokeStyle='#f8fafc';
+        ctx.lineWidth=3;
+        ctx.beginPath();
+        ctx.arc(x,y,24,0,Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.fillStyle='#0f172a';
+      ctx.font='bold 16px "Noto Sans TC"';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText(String(i+1),x,y);
+    }
+    const travelerIndex=Math.min(progress,nodes-1);
+    const tx=margin+travelerIndex*spacing;
+    const ty=height/2;
+    ctx.fillStyle='#f8fafc';
+    ctx.beginPath();
+    ctx.arc(tx,ty-42,12,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle=area.theme;
+    ctx.beginPath();
+    ctx.arc(tx,ty-42,6,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle='rgba(148,163,184,0.8)';
+    ctx.font='14px "Noto Sans TC"';
+    ctx.textAlign='left';
+    ctx.fillText(area.name,width*0.08,height*0.15);
+    ctx.fillText(`節點 ${progress+1}/${nodes}`,width*0.08,height*0.21);
+  }
 }
-
-// === 按鈕事件 ===
-$('#copyId').addEventListener('click', ()=> copyText(myIdEl.value||''));
-$('#connectBtn').addEventListener('click', ()=>{ if(!peer){ alert('PeerJS 尚未就緒'); return; } const id=peerIdEl.value.trim(); if(!id){ alert('請輸入對方ID'); return; } if(conn) try{ conn.close(); }catch(_){} conn=peer.connect(id,{reliable:true}); wireConn(); });
-$('#sendBtn').addEventListener('click', sendText);
-msgEl?.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendText(); }});
-function sendText(){ const t=msgEl.value.trim(); if(!t) return; if(!conn||!conn.open){ alert('尚未連線'); return; } conn.send(t); addMsg('me', esc(t).replace(/♥/g,'💖')); beep('send'); msgEl.value=''; msgEl.focus(); }
-
-imgFileEl?.addEventListener('change', async()=>{ const f=imgFileEl.files?.[0]; if(!f) return; if(!conn||!conn.open){ alert('尚未連線'); imgFileEl.value=''; return; }
-  try{ const blob=await toJPEGBlob(f); conn.send(blob); const url=URL.createObjectURL(blob); addMsg('me',`<img class=img src="${url}">`); beep('send'); }
-  catch(e){ alert('圖片處理失敗：'+e); } imgFileEl.value='';
-});
-function toJPEGBlob(file,maxW=1600,maxH=1600,quality=0.85){ return new Promise((resolve,reject)=>{ const img=new Image(); const url=URL.createObjectURL(file); img.onload=()=>{ let w=img.width,h=img.height; const r=Math.min(1,maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h); c.toBlob(b=>{ URL.revokeObjectURL(url); resolve(b); },'image/jpeg',quality); }; img.onerror=reject; img.src = url; }); }
-
-// ===== 自我測試（不影響 UI） =====
-(function selfTests(){
-  console.group('Self tests');
-  const enc=esc('<>&'); console.assert(enc==='&lt;&gt;&amp;'||enc==='&lt;&gt;&amp;', 'esc() 應轉義成功', enc);
-  const t=now(); console.assert(/^\d{2}:\d{2}$/.test(t), 'now() 應回 HH:MM', t);
-  console.groupEnd();
+class Game{
+  constructor(){
+    this.rng=seedRandom(Date.now());
+    this.map=new SceneMap(this);
+    this.battle=new BattleSystem(this);
+    this.inventory=new Inventory();
+    this.playerChoice=null;
+    this.player=null;
+    this.currentArea=null;
+    this.areaIndex=0;
+    this.areaProgress=0;
+    this.stats={wins:0,streak:0,bestStreak:0,totalEnemies:0,burnHits:0,overHits:0,startTime:Date.now(),cleared:false};
+    this.passiveNotes='';
+    this.load();
+    this.bindUI();
+    requestAnimationFrame(this.loop.bind(this));
+  }
+  loop(ts){
+    if(!reducedMotion || ts-this.map.last>CONFIG.ANIM_DURATION){
+      this.map.last=ts;
+      this.map.draw(ts);
+    }
+    requestAnimationFrame(this.loop.bind(this));
+  }
+  bindUI(){
+    const buttons=[
+      {id:'基音打擊',action:'base'},
+      {id:'疊拍調律',action:'tune'},
+      {id:'節奏護壁',action:'shield'},
+      {id:'和聲擴散',action:'spread'},
+      {id:'必殺技',action:'ultimate'},
+      {id:'道具',action:'items'}
+    ];
+    const actionWrap=document.getElementById('actionButtons');
+    buttons.forEach((btn,i)=>{
+      const el=document.createElement('button');
+      el.textContent=`${i+1}.${btn.id}`;
+      el.dataset.action=btn.action;
+      el.addEventListener('click',()=>this.onAction(el.dataset.action));
+      actionWrap.appendChild(el);
+    });
+    document.addEventListener('keydown',e=>this.onKey(e));
+    document.getElementById('downloadSave').addEventListener('click',()=>this.downloadSave());
+    document.getElementById('restartBtn').addEventListener('click',()=>this.reset());
+    document.getElementById('toggleSound').addEventListener('change',e=>{soundOn=e.target.checked; if(soundOn) playTone(620,0.12);});
+    document.getElementById('toggleMotion').addEventListener('change',e=>{reducedMotion=e.target.checked;});
+    document.getElementById('uploadSave').addEventListener('change',e=>this.uploadSave(e));
+    this.map.canvas.addEventListener('click',()=>this.advance());
+    document.querySelectorAll('#virtual-pad .virtual-btn').forEach(btn=>btn.addEventListener('click',()=>{const key=btn.dataset.key;this.handleVirtualKey(key);}));
+  }
+  handleVirtualKey(key){
+    this.handleMovement(key);
+    if(key==='Space') this.onAction('confirm');
+  }
+  onKey(e){
+    if(document.getElementById('charSelect').style.display!=='none') return;
+    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d','W','A','S','D'].includes(e.key)){
+      this.handleMovement(e.key);
+    }
+    const actions=['1','2','3','4','5','6'];
+    if(actions.includes(e.key)){
+      const idx=Number(e.key)-1;
+      const btn=document.querySelector(`#actionButtons button:nth-child(${idx+1})`);
+      btn?.click();
+    }
+    if(e.code==='Space'){this.onAction('confirm');}
+  }
+  handleMovement(key){
+    if(!this.currentArea || this.battle.inBattle) return;
+    if(['ArrowRight','ArrowUp','d','w','D','W'].includes(key)){
+      this.advance();
+    }
+  }
+  advance(){
+    if(this.areaProgress>=this.currentArea.nodes) return;
+    this.onNodeEvent();
+  }
+  onNodeEvent(){
+    const area=this.currentArea;
+    const event=area.events[Math.min(this.areaProgress,area.events.length-1)];
+    this.areaProgress++;
+    this.updateHeader();
+    switch(event){
+      case 'battle':
+      case 'elite':
+      case 'boss':
+        this.battle.startBattle(area,event);
+        break;
+      case 'rest':
+        this.player.hp=Math.min(this.player.maxHp,this.player.hp+20);
+        this.player.en=Math.min(this.player.maxEn,this.player.en+12);
+        this.log('在清音節點稍作休息，HP/EN 回復。');
+        break;
+      case 'hazard':
+        const dmg=6;
+        this.player.hp=Math.max(0,this.player.hp-dmg);
+        this.log(`殘響陷阱造成 ${dmg} 傷害。`);
+        if(this.player.hp<=0) this.gameOver();
+        break;
+      case 'trial':
+        this.offerUpgrade();
+        break;
+    }
+    if(this.areaProgress>=area.nodes && !this.battle.inBattle){
+      this.nextArea();
+    }
+    this.save();
+  }
+  onBattleWin(){
+    this.player.hp=Math.min(this.player.maxHp,this.player.hp+10);
+    this.player.en=Math.min(this.player.maxEn,this.player.en+10);
+    this.grantDrop();
+    this.checkLevel();
+    if(this.areaProgress>=this.currentArea.nodes){
+      this.nextArea();
+    }
+    this.save();
+  }
+  grantDrop(){
+    if(this.inventory.items.length>=6) return;
+    const drop=this.rng.pick(DATA.items);
+    this.inventory.add(drop.id);
+    this.log(`獲得道具：${drop.name}`);
+  }
+  checkLevel(){
+    this.stats.winsTotal=(this.stats.winsTotal||0)+1;
+    if(this.stats.winsTotal%2===0){
+      this.offerUpgrade();
+    }
+  }
+  offerUpgrade(){
+    const choices=[];
+    while(choices.length<3){
+      const pick=this.rng.pick(DATA.upgrades);
+      if(!choices.includes(pick)) choices.push(pick);
+    }
+    const msg=`升級選擇：\n${choices.map((c,i)=>`${i+1}.${c.text}`).join('\n')}\n按 1-3 選擇`;
+    this.log('獲得升級機會！');
+    let chosen=null;
+    const handler=e=>{
+      if(['1','2','3'].includes(e.key)){
+        chosen=choices[Number(e.key)-1];
+        window.removeEventListener('keydown',handler);
+        chosen.effect(this.player);
+        this.player.passives=this.player.passives||[];
+        this.log(`選擇：${chosen.text}`);
+        this.save();
+      }
+    };
+    window.addEventListener('keydown',handler);
+    toast('升級：使用鍵 1-3 選擇');
+  }
+  nextArea(){
+    this.areaIndex++;
+    if(this.areaIndex>=DATA.areas.length){
+      this.victory();
+      return;
+    }
+    this.currentArea=DATA.areas[this.areaIndex];
+    this.areaProgress=0;
+    this.updateHeader();
+    this.log(`進入 ${this.currentArea.name}`);
+  }
+  updateHeader(){
+    const info=document.getElementById('mapInfo');
+    if(!this.currentArea){info.textContent='區域：—';return;}
+    const percent=Math.floor((this.areaProgress/this.currentArea.nodes)*100);
+    info.textContent=`區域：${this.currentArea.name} (${this.areaIndex+1}/${DATA.areas.length}) · 進度 ${percent}%`;
+  }
+  onAction(action){
+    if(action==='items'){
+      toast('點擊背包道具使用');
+      return;
+    }
+    if(!this.battle.inBattle){
+      if(action==='confirm') this.advance();
+      return;
+    }
+    this.battle.playerAction(action);
+    this.save();
+  }
+  updateHUD(){
+    const p=this.player;
+    document.getElementById('charName').textContent=p?.name||'旅人';
+    document.getElementById('charPassive').textContent=`被動：${p.passive || this.passiveNotes}`;
+    document.getElementById('roundInfo').textContent=this.battle.inBattle?`回合 ${this.battle.turn}`:'探索中';
+    const hpPerc=p?Math.max(0,p.hp/p.maxHp*100):0;
+    const enPerc=p?Math.max(0,p.en/p.maxEn*100):0;
+    document.getElementById('hpVal').textContent=p?`${p.hp}/${p.maxHp}`:'0';
+    document.getElementById('enVal').textContent=p?`${p.en}/${p.maxEn}`:'0';
+    document.getElementById('atkVal').textContent=p?.atk??0;
+    document.getElementById('defVal').textContent=p?.def??0;
+    document.getElementById('accVal').textContent=p?.acc??0;
+    document.getElementById('evaVal').textContent=p?.eva??0;
+    document.getElementById('critVal').textContent=p?`${Math.round((p.crit+(p.buffs?.crit||0))*100)}%`:'0%';
+    document.getElementById('hpBar').style.width=`${hpPerc}%`;
+    document.getElementById('enBar').style.width=`${enPerc}%`;
+    document.getElementById('enemyHP').textContent=this.battle.enemy?`${this.battle.enemy.hp}/${this.battle.enemy.maxHp}`:'—';
+    const statusEl=document.getElementById('statusList');
+    statusEl.innerHTML='';
+    const statuses=[
+      p.status.detune&&{text:`失調 ${p.status.detune}`,color:'var(--warn)'},
+      p.status.burn&&{text:`殘響灼 ${p.status.burn}`,color:'var(--danger)'},
+      p.status.lag&&{text:`遲拍 ${p.status.lag}`,color:'var(--delay)'},
+      p.status.oversound&&{text:`過音 ${p.status.oversound}`,color:'#fb923c'},
+      p.status.spreadCrit&&{text:`和聲擴散 ${p.status.spreadCrit}`,color:'var(--accent)'},
+      p.buffs.shield>0&&{text:`護盾 ${p.buffs.shield}`,color:'var(--accent)'},
+      this.battle.enemy?.status.detune&&{text:`敵失調 ${this.battle.enemy.status.detune}`,color:'var(--warn)'}
+    ].filter(Boolean);
+    statuses.forEach(s=>{
+      const chip=document.createElement('div');
+      chip.className='status-chip';
+      chip.style.background=s.color+'33';
+      chip.style.border=`1px solid ${s.color}88`;
+      chip.textContent=s.text;
+      statusEl.appendChild(chip);
+    });
+    const inv=document.getElementById('inventory');
+    inv.innerHTML='';
+    const items=this.inventory.items;
+    DATA.items.forEach(()=>{});
+    for(let i=0;i<6;i++){
+      const slot=document.createElement('div');
+      if(items[i]){
+        const item=DATA.items.find(it=>it.id===items[i]);
+        slot.className='inv-item';
+        slot.innerHTML=`${item.name}`;
+        slot.title=item.desc;
+        slot.addEventListener('click',()=>this.battle.playerAction(`item:${i}`));
+      }else{
+        slot.className='inv-item empty';
+        slot.textContent='空';
+      }
+      inv.appendChild(slot);
+    }
+  }
+  log(msg){
+    const log=document.getElementById('log');
+    const div=document.createElement('div');
+    div.className='log-entry';
+    div.textContent=msg;
+    log.appendChild(div);
+    while(log.children.length>6) log.removeChild(log.firstChild);
+    log.scrollTop=log.scrollHeight;
+  }
+  victory(){
+    this.stats.cleared=true;
+    const time=((Date.now()-this.stats.startTime)/1000).toFixed(1);
+    this.log(`通關！耗時 ${time}s，擊敗 ${this.stats.totalEnemies} 名敵人，最高連勝 ${this.stats.bestStreak||this.stats.streak}，過音反噬 ${this.stats.overHits} 次。`);
+    toast('和聲重生！旅程完成');
+    this.save();
+  }
+  gameOver(){
+    this.stats.streak=0;
+    toast('旅程告一段落，請重新開始。');
+    this.save();
+  }
+  reset(){
+    localStorage.removeItem(storageKey);
+    this.inventory=new Inventory();
+    this.battle=new BattleSystem(this);
+    this.rng=seedRandom(Date.now());
+    this.playerChoice=null;
+    this.player=null;
+    this.currentArea=null;
+    this.areaIndex=0;
+    this.areaProgress=0;
+    this.stats={wins:0,streak:0,bestStreak:0,totalEnemies:0,burnHits:0,overHits:0,startTime:Date.now(),cleared:false};
+    document.getElementById('charSelect').style.display='flex';
+    document.getElementById('log').innerHTML='';
+    this.updateHeader();
+    this.updateHUD();
+  }
+  save(){
+    if(!this.playerChoice) return;
+    const data={
+      playerChoice:this.playerChoice,
+      player:{
+        hp:this.player.hp,
+        en:this.player.en,
+        atk:this.player.atk,
+        def:this.player.def,
+        acc:this.player.acc,
+        eva:this.player.eva,
+        crit:this.player.crit,
+        passives:this.player.passives||[],
+        buffs:this.player.buffs
+      },
+      areaIndex:this.areaIndex,
+      areaProgress:this.areaProgress,
+      inventory:this.inventory.items,
+      rng:this.rng.seed,
+      stats:this.stats
+    };
+    localStorage.setItem(storageKey,JSON.stringify(data));
+  }
+  load(){
+    const raw=localStorage.getItem(storageKey);
+    if(!raw){
+      document.getElementById('charSelect').style.display='flex';
+      return;
+    }
+    try{
+      const data=JSON.parse(raw);
+      this.initPlayer(data.playerChoice,true);
+      Object.assign(this.player,data.player);
+      this.player.passives=data.player.passives||[];
+      this.player.buffs=data.player.buffs||{};
+      this.areaIndex=data.areaIndex||0;
+      this.currentArea=DATA.areas[this.areaIndex]||DATA.areas[0];
+      this.areaProgress=data.areaProgress||0;
+      this.inventory.items=data.inventory||[];
+      this.rng=seedRandom(data.rng||Date.now());
+      this.stats=data.stats||this.stats;
+      this.stats.bestStreak=this.stats.bestStreak||0;
+      this.stats.overHits=this.stats.overHits||0;
+      document.getElementById('charSelect').style.display='none';
+      this.updateHeader();
+      this.updateHUD();
+      this.log('已從存檔載入旅程。');
+    }catch(e){
+      console.error(e);
+      this.reset();
+    }
+  }
+  initPlayer(choice,fromLoad=false){
+    this.playerChoice=choice;
+    const base=INITIAL_STATS[choice];
+    this.player=new Entity({...base});
+    this.player.passives=[];
+    this.passiveNotes=base.passive;
+    this.player.reset();
+    this.currentArea=DATA.areas[0];
+    this.areaIndex=0;
+    this.areaProgress=0;
+    if(choice==='璃'){
+      this.player.buffs.shield=12;
+    }else if(choice==='科'){
+      this.player.buffs.acc=20;
+    }
+    if(!fromLoad) {
+      this.stats.startTime=Date.now();
+      this.log(`選擇 ${base.name}。`);
+      this.save();
+    }
+    document.getElementById('charSelect').style.display='none';
+    this.updateHeader();
+    this.updateHUD();
+  }
+  bindCharacterSelect(){
+    const cards=document.querySelectorAll('.char-card');
+    let selected=null;
+    cards.forEach(card=>{
+      card.addEventListener('click',()=>{
+        cards.forEach(c=>c.classList.remove('selected'));
+        card.classList.add('selected');
+        selected=card.dataset.id;
+        document.getElementById('confirmChar').disabled=false;
+      });
+    });
+    document.getElementById('confirmChar').addEventListener('click',()=>{
+      if(!selected) return;
+      this.initPlayer(selected);
+      playTone(660,0.2);
+      this.log('抵達清音林。');
+    });
+  }
+  updateInventoryUI(){
+    this.updateHUD();
+  }
+  downloadSave(){
+    const raw=localStorage.getItem(storageKey);
+    if(!raw){toast('沒有存檔');return;}
+    const blob=new Blob([raw],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='stringRealmSave.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  uploadSave(ev){
+    const file=ev.target.files?.[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      try{
+        JSON.parse(reader.result);
+        localStorage.setItem(storageKey,reader.result);
+        toast('載入成功，重新整理生效');
+      }catch(e){
+        toast('存檔格式錯誤');
+      }
+    };
+    reader.readAsText(file);
+  }
+}
+const game=new Game();
+game.bindCharacterSelect();
 })();
-
-// 記住暱稱
-(function(){ const saved = localStorage.getItem('lc.nick'); if(saved) nickEl.value=saved; nickEl.addEventListener('change', ()=> localStorage.setItem('lc.nick', nickEl.value)); })();
 </script>
 </body>
 </html>
