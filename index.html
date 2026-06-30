@@ -1,234 +1,1339 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- 作者：ChatGPT gpt-5-codex，版本：1.0，快捷鍵：WASD/方向鍵移動，1-6 行動，Space 確認 -->
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>科科💖紫荊甜蜜小天地</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://unpkg.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<meta name="theme-color" content="#ff9abf" />
+<title>弦界旅人：和聲之路</title>
 <style>
-  :root{ --rose:#ff79a8; --rose-2:#ffe0ec; --sky:#7bb2ff; --sky-2:#dfeaff; --ink:#1f2937; --card:#ffffff; --muted:#6b7280; --ring:#93c5fd; --shadow:0 16px 40px rgba(0,0,0,.10); --me:#ffffff; --you-start:#fff0f5; --you-end:#ffeaf1; }
-  *{box-sizing:border-box} html,body{height:100%}
-  body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Noto Sans, Arial; color:var(--ink); display:flex; flex-direction:column; align-items:center; overflow-x:hidden;
-    background: radial-gradient(1200px 760px at 8% -8%, var(--rose-2), transparent), radial-gradient(1000px 640px at 92% 8%, var(--sky-2), transparent), linear-gradient(165deg, #fff, #fbf8ff); transition: background 0.4s ease; }
-  body.theme-blue{ --rose:#7bb2ff; --sky:#6aa9ff; --rose-2:#dfeaff; --sky-2:#f0f7ff; --you-start:#eef6ff; --you-end:#e4f0ff; }
-  .bg-photo{position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center; opacity:.18; filter:saturate(110%) contrast(105%)}
-  .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:-1}
-  .hearts span{position:absolute; font-size:18px; opacity:.12; animation:float 14s linear infinite; filter:saturate(130%)}
-  .hearts span:nth-child(odd){opacity:.18} @keyframes float{ from{transform:translateY(110vh) rotate(0)} to{transform:translateY(-10vh) rotate(360deg)} }
-  .app{ position:relative; width:min(1000px,100%); min-height:100%; display:flex; flex-direction:column; border-radius:40px; background-clip:padding-box; }
-  header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)); border-bottom:1px solid #f0e7f3; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-radius:20px }
-  .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.5px} .brand .heart{font-size:20px}
-  .chip{padding:6px 10px; border-radius:999px; font-size:12px; background:#fff; border:1px solid #e5e7eb} .chip.ok{color:#16a34a; border-color:#16a34a} .chip.warn{color:#f59e0b; border-color:#f59e0b} .chip.bad{color:#ef4444; border-color:#ef4444}
-  .tabs{display:flex; gap:10px; align-items:center; padding:10px 16px} .tab{padding:10px 14px; border-radius:999px; font-weight:800; border:1px solid #e5e7eb; background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.06); cursor:pointer} .tab[disabled]{opacity:.5; cursor:not-allowed} .tab.active{background:linear-gradient(135deg,var(--sky),var(--rose)); color:#fff; border-color:transparent}
-  .grid{ display:grid; gap:16px; grid-template-columns:1fr; margin:0 16px 16px } @media(min-width:900px){ .grid{ grid-template-columns: .95fr 1.05fr } }
-  .card{ background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86)); border-radius:22px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.05); padding:18px; backdrop-filter: blur(8px); position:relative; overflow:hidden }
-  .sec-title{ font-weight:1000; font-size:14px; margin:6px 0 12px; letter-spacing:.5px; display:flex; align-items:center; gap:8px; z-index:2; position:relative } .sec-title:after{ content:"💞"; opacity:.7 }
-  label{ font-size:12px; color:var(--muted) } select,input[type=text]{ width:100%; padding:13px 16px; border-radius:16px; border:1px solid #e5e7eb; outline:none; font-size:14px; background:#fff }
-  select:focus,input[type=text]:focus{ border-color:var(--ring); box-shadow:0 0 0 4px rgba(147,197,253,.30) } .pill{ border-radius:999px }
-  button{ border:0; padding:12px 16px; border-radius:16px; font-weight:900; cursor:pointer; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--sky),var(--rose)); box-shadow:0 10px 22px rgba(0,0,0,.10) }
-  button.ghost{ background:#fff; color:#111; border:1px solid #e5e7eb; box-shadow:none } button.small{ padding:9px 12px; font-size:12px }
-  .row{ display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end } .row.center{ align-items:center } .muted{ color:var(--muted) } .divider{ height:1px; background:linear-gradient(90deg, #eee, #f6e9f1, #eee); margin:12px 0 }
-  .avatar{ width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:1000; color:#fff; background:linear-gradient(135deg,var(--rose),var(--sky)); box-shadow:0 8px 22px rgba(0,0,0,.12) }
-  .hidden{ display:none !重要 }
-  .watermark{position:absolute; bottom:8px; right:8px; width:90px; height:90px; background-size:cover; background-position:center; opacity:0.25; border-radius:12px; z-index:1}
-  .chat{ display:flex; flex-direction:column; min-height:500px; max-height:72vh; z-index:2; position:relative }
-  .log{ flex:1; overflow:auto; padding:14px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth }
-  .msgrow{ display:flex; gap:12px; align-items:flex-end } .msgrow.me{ justify-content:flex-end }
-  .bubble{ position:relative; max-width:78%; padding:13px 16px; border-radius:22px; background:#f8fafc; border:1px solid #eef2f7; box-shadow:0 6px 18px rgba(0,0,0,.06) }
-  .bubble:after{ content:""; position:absolute; bottom:-2px; width:18px; height:18px; transform:rotate(45deg); background:inherit; border:inherit }
-  .me .bubble{ background:#fff; border-color:#f0f0f0 } .me .bubble:after{ right:8px; border-left-color:transparent; border-top-color:transparent }
-  .you .bubble{ background:linear-gradient(180deg, var(--you-start), var(--you-end)); border-color:rgba(255,182,193,.45) } .you .bubble:after{ left:8px; border-right-color:transparent; border-top-color:transparent }
-  .meta{ font-size:11px; color:var(--muted); margin-top:6px; display:flex; gap:6px; align-items:center }
-  .img{ max-width:260px; border-radius:16px; display:block; box-shadow:0 6px 18px rgba(0,0,0,.08) }
-  .inputbar{ display:flex; gap:12px; padding:12px; background:linear-gradient(180deg,#fff,#fff8); border-top:1px solid #eee; border-bottom-left-radius:18px; border-bottom-right-radius:18px }
-  .inputbar input[type=file]{ display:none }
-  .msg{ flex:1; border:1px solid #e5e7eb; border-radius:999px; padding:13px 18px; font-size:15px; background:#fff }
-  .typing{ font-size:12px; color:var(--muted); margin-top:4px; height:16px }
-  footer{ text-align:center; color:var(--muted); font-size:12px; padding:10px 0 36px }
-  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:10px; font-size:12px; opacity:0; transition:opacity .25s ease; z-index:50}
-  .toast.show{opacity:.9}
+:root {
+  color-scheme: light;
+  --bg:#0f172a;
+  --panel:#111827ee;
+  --accent:#38bdf8;
+  --accent-soft:#bae6fd44;
+  --hp:#22c55e;
+  --en:#3b82f6;
+  --yellow:#facc15;
+  --red:#ef4444;
+  --purple:#a855f7;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --card:#1e293b;
+}
+body {
+  margin:0;
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:radial-gradient(circle at 20% 20%,rgba(56,189,248,0.25),transparent 60%),
+             radial-gradient(circle at 80% 30%,rgba(139,92,246,0.25),transparent 60%),
+             linear-gradient(160deg,#020617,#0f172a 70%);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+header {
+  width:100%;
+  max-width:1080px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 16px;
+  gap:12px;
+  background:var(--panel);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(148,163,184,0.18);
+}
+header h1 {
+  margin:0;
+  font-size:1.2rem;
+  letter-spacing:2px;
+}
+header .progress {
+  font-size:0.9rem;
+  color:var(--muted);
+}
+header .settings {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+button, .btn {
+  background:var(--accent);
+  color:#02111c;
+  border:none;
+  border-radius:12px;
+  padding:8px 14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease, opacity .2s;
+  box-shadow:0 6px 16px rgba(56,189,248,0.35);
+}
+button:hover:not(:disabled) {
+  transform:translateY(-2px);
+}
+button:active:not(:disabled) {
+  transform:scale(0.97);
+}
+button:disabled {
+  opacity:0.4;
+  cursor:not-allowed;
+}
+button.ghost {
+  background:rgba(148,163,184,0.18);
+  color:var(--text);
+  box-shadow:none;
+}
+main {
+  width:100%;
+  max-width:1080px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  padding:14px 16px 40px;
+}
+.layout {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+canvas {
+  background:rgba(15,23,42,0.7);
+  border-radius:18px;
+  border:1px solid rgba(148,163,184,0.24);
+  width:100%;
+  height:auto;
+}
+.panel {
+  background:var(--panel);
+  border-radius:18px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  border:1px solid rgba(148,163,184,0.18);
+}
+.stats {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:8px;
+}
+.stat {
+  background:var(--card);
+  border-radius:10px;
+  padding:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:0.85rem;
+}
+.bar {
+  height:6px;
+  background:rgba(148,163,184,0.25);
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.bar span {
+  display:block;
+  height:100%;
+}
+.status-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  font-size:0.75rem;
+}
+.status-tags span {
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(148,163,184,0.2);
+}
+.actions {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:10px;
+}
+.actions button {
+  font-size:0.9rem;
+}
+.log {
+  min-height:120px;
+  max-height:200px;
+  overflow:auto;
+  background:rgba(2,6,23,0.55);
+  border-radius:12px;
+  padding:10px;
+  font-size:0.85rem;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.log div {
+  opacity:0.92;
+}
+.inventory {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.inventory .slot {
+  background:rgba(148,163,184,0.18);
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:0.8rem;
+  cursor:pointer;
+}
+.inventory .slot.empty {
+  opacity:0.35;
+  cursor:default;
+}
+#modal {
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(15,23,42,0.6);
+  z-index:10;
+}
+#modal .box {
+  background:var(--panel);
+  padding:20px;
+  border-radius:16px;
+  max-width:320px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  text-align:center;
+}
+.choice-list {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.choice-list button {
+  width:100%;
+}
+#hero-select {
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,0.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+}
+#hero-select .card {
+  background:var(--panel);
+  padding:24px;
+  border-radius:18px;
+  display:grid;
+  gap:16px;
+  max-width:560px;
+}
+.hero-options {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:12px;
+}
+.hero-options button {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:flex-start;
+  background:rgba(56,189,248,0.15);
+  color:var(--text);
+}
+.hero-options button.active {
+  background:rgba(56,189,248,0.35);
+}
+.badge {
+  font-size:0.7rem;
+  color:var(--muted);
+}
+.settings .file-input {
+  position:relative;
+  overflow:hidden;
+}
+.settings .file-input input {
+  position:absolute;
+  inset:0;
+  opacity:0;
+  cursor:pointer;
+}
+#virtual-pad {
+  display:none;
+  position:fixed;
+  bottom:16px;
+  left:16px;
+  z-index:9;
+  gap:12px;
+  color:#0f172a;
+}
+#virtual-pad .dpad {
+  width:120px;
+  height:120px;
+  background:rgba(148,163,184,0.25);
+  border-radius:18px;
+  display:grid;
+  grid-template-columns:repeat(3,40px);
+  grid-template-rows:repeat(3,40px);
+  gap:0;
+  overflow:hidden;
+}
+#virtual-pad button {
+  background:rgba(56,189,248,0.65);
+  border-radius:0;
+  border:1px solid rgba(15,23,42,0.3);
+  box-shadow:none;
+  color:#02111c;
+}
+#virtual-pad .confirm {
+  width:80px;
+  height:80px;
+  background:rgba(148,163,184,0.35);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+footer {
+  margin-top:auto;
+  width:100%;
+  max-width:1080px;
+  padding:16px;
+  color:var(--muted);
+  font-size:0.85rem;
+  background:rgba(15,23,42,0.7);
+  border-top:1px solid rgba(148,163,184,0.18);
+}
+footer ol {
+  padding-left:20px;
+  margin:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+footer li {
+  flex:1 1 180px;
+}
+.toast {
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#0ea5e9;
+  color:#03111d;
+  padding:10px 16px;
+  border-radius:12px;
+  opacity:0;
+  transition:opacity .3s ease;
+  pointer-events:none;
+  z-index:30;
+}
+.toast.show {
+  opacity:1;
+}
+.reduce-motion * {
+  transition:none !important;
+  animation:none !important;
+}
+@media (min-width:900px) {
+  .layout {
+    grid-template-columns:360px 1fr;
+    align-items:start;
+  }
+}
+@media (max-width:820px) {
+  header {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .actions {
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+  #virtual-pad {
+    display:flex;
+  }
+}
 </style>
 </head>
 <body>
-  <div class="bg-photo" id="bgPhoto" aria-hidden="true"></div>
-  <div class="hearts" aria-hidden="true">
-    <span style="left:5%; animation-delay:0s">💗</span><span style="left:18%; animation-delay:2s">💖</span><span style="left:33%; animation-delay:4s">💘</span><span style="left:55%; animation-delay:1s">💞</span><span style="left:72%; animation-delay:3s">💕</span><span style="left:87%; animation-delay:5s">💓</span>
+<header>
+  <div>
+    <h1>弦界旅人：和聲之路</h1>
+    <div class="progress" id="progressText">區域：-</div>
   </div>
-
-  <div class="app">
-    <header>
-      <div class="brand"><span class="heart">💖</span>科科💖紫荊甜蜜小天地</div>
-      <div class="row center">
-        <button id="themeBtn" class="small ghost" title="切換主題">主題：粉/藍</button>
-        <button id="soundBtn" class="small ghost" title="啟用提示音">提示音：關</button>
-        <label for="bgFile" class="chip" style="cursor:pointer">自選背景</label>
-        <input id="bgFile" type="file" accept="image/*" style="display:none" />
-        <span id="statusChip" class="chip bad">未連線</span><span class="chip ok" title="WebRTC DTLS">已加密</span>
+  <div class="settings">
+    <button class="ghost" id="soundToggle">音效：關</button>
+    <button class="ghost" id="motionToggle">動效：開</button>
+    <button class="ghost" id="restartBtn">重新開始</button>
+    <button class="ghost" id="downloadSave">下載存檔</button>
+    <label class="ghost btn file-input">上傳存檔<input type="file" id="uploadSave" accept="application/json" /></label>
+  </div>
+</header>
+<main>
+  <div class="layout">
+    <canvas id="mapCanvas" width="360" height="360" aria-label="區域節點"></canvas>
+    <div class="panel" id="rightPanel">
+      <div id="heroInfo">
+        <div id="heroName"></div>
+        <div class="stats">
+          <div class="stat">HP <span id="hpValue"></span></div>
+          <div class="stat">EN <span id="enValue"></span></div>
+          <div class="stat">ATK <span id="atkValue"></span></div>
+          <div class="stat">DEF <span id="defValue"></span></div>
+          <div class="stat">ACC <span id="accValue"></span></div>
+          <div class="stat">EVA <span id="evaValue"></span></div>
+        </div>
+        <div class="bar"><span id="hpBar" style="background:var(--hp);width:0%"></span></div>
+        <div class="bar"><span id="enBar" style="background:var(--en);width:0%"></span></div>
+        <div class="status-tags" id="statusTags"></div>
       </div>
-    </header>
-
-    <div class="tabs">
-      <button id="tabConnect" class="tab active">① 連線</button>
-      <button id="tabChat" class="tab" disabled>② 聊天</button>
+      <div class="panel" style="gap:10px; padding:12px; background:rgba(2,6,23,0.6);">
+        <div>行動選擇（1-6）：<span id="turnInfo">-</span></div>
+        <div class="actions">
+          <button id="action1">基音打擊</button>
+          <button id="action2">疊拍調律</button>
+          <button id="action3">節奏護壁</button>
+          <button id="action4">和聲擴散</button>
+          <button id="action5">必殺技</button>
+          <button id="action6">道具</button>
+        </div>
+      </div>
+      <div>
+        <div>戰況記錄</div>
+        <div class="log" id="logBox"></div>
+      </div>
+      <div>
+        <div>背包</div>
+        <div class="inventory" id="inventory"></div>
+      </div>
     </div>
-
-    <section id="page-connect" class="grid">
-      <div class="card">
-        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAH0B6ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AKuKKKAP//Z')"></div>
-        <div class="sec-title">連線設定</div>
-        <div class="row">
-          <div style="flex:1">
-            <label>我的暱稱</label>
-            <select id="nick" class="pill"><option value="科科寶貝">科科寶貝</option><option value="紫荊寶貝">紫荊寶貝</option></select>
-          </div>
-          <div style="flex:1">
-            <label>我的ID（分享給對方）</label>
-            <input id="myId" class="pill" type="text" readonly />
-          </div>
-          <button id="copyId" class="small ghost">複製ID</button>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-          <div style="flex:1">
-            <label>對方ID（向對方索取並貼上）</label>
-            <input id="peerId" class="pill" type="text" placeholder="輸入對方ID後按『連線』" />
-          </div>
-          <button id="connectBtn">連線</button>
-        </div>
-        <div class="muted" id="tip" style="margin-top:8px">狀態：待連線</div>
-        <div class="typing" id="typing"> </div>
-      </div>
-    </section>
-
-    <section id="page-chat" class="grid hidden">
-      <div class="card" style="grid-column:1/-1">
-        <div class="watermark" style="background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCB6AqQDACIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8fLz9PX29/j5+v/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhEDEQA/AIPRRRQAH//Z')"></div>
-        <div class="sec-title">聊天</div>
-        <div class="chat">
-          <div id="log" class="log"></div>
-          <div class="inputbar">
-            <label for="imgFile" class="chip" style="cursor:pointer">＋圖片</label>
-            <input id="imgFile" type="file" accept="image/*" capture="environment" />
-            <input id="msg" class="msg" type="text" placeholder="輸入訊息…（Enter送出；輸入 ♥ 自動變愛心貼圖)" />
-            <button id="sendBtn">送出</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>WebRTC 端到端加密｜若無法連線，請確認使用 GitHub Pages 的 https 網址並稍後重試</footer>
   </div>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+</main>
+<div id="hero-select" role="dialog" aria-modal="true">
+  <div class="card">
+    <h2>選擇旅人</h2>
+    <div class="hero-options">
+      <button data-hero="li" class="hero-btn">
+        <strong>琴者·璃</strong>
+        <span class="badge">偏支援</span>
+        <span>被動：開場獲得 1 層和聲護盾。</span>
+        <span>必殺「溫柔分解」：移除負面狀態並回復 EN（冷卻 3）。</span>
+      </button>
+      <button data-hero="ke" class="hero-btn">
+        <strong>弦客·科</strong>
+        <span class="badge">偏輸出</span>
+        <span>被動：首回合命中提高。</span>
+        <span>必殺「脈衝強擊」：下回合必中且必定暴擊（冷卻 3）。</span>
+      </button>
+    </div>
+    <button id="confirmHero" disabled>開始旅程 (Space)</button>
+  </div>
+</div>
+<div id="modal">
+  <div class="box" id="modalBox"></div>
+</div>
+<div id="virtual-pad">
+  <div class="dpad">
+    <span></span>
+    <button data-key="ArrowUp">▲</button>
+    <span></span>
+    <button data-key="ArrowLeft">◀</button>
+    <button data-key="Space">●</button>
+    <button data-key="ArrowRight">▶</button>
+    <span></span>
+    <button data-key="ArrowDown">▼</button>
+    <span></span>
+  </div>
+  <button class="confirm" data-key="Space">確定</button>
+</div>
+<div class="toast" id="toast"></div>
+<footer>
+  <strong>新手小教學</strong>
+  <ol>
+    <li>利用 WASD 或虛擬方向鍵在各區域節點間前進。</li>
+    <li>節點可能觸發遭遇戰、事件或補給，戰鬥採回合制。</li>
+    <li>使用「節拍器」可在短時間內提升命中率並化解失調。</li>
+    <li>擊敗失調大師，守護弦界的和聲。</li>
+    <li>可於設定中重新開始或下載 / 上傳存檔。</li>
+  </ol>
+</footer>
 <script>
-// ===== DOM 快捷 =====
-const $=(q)=>document.querySelector(q);
-const statusChip=$('#statusChip'), tip=$('#tip'), myIdEl=$('#myId'), peerIdEl=$('#peerId'), msgEl=$('#msg');
-const imgFileEl=$('#imgFile'), nickEl=$('#nick'), tabConnect=$('#tabConnect'), tabChat=$('#tabChat');
-const pageConnect=$('#page-connect'), pageChat=$('#page-chat'), typingEl=$('#typing');
-const logEl=document.querySelector('#log');
-function showConnect(){tabConnect.classList.add('active');tabChat.classList.remove('active');pageConnect.classList.remove('hidden');pageChat.classList.add('hidden');}
-function showChat(){tabChat.classList.add('active');tabConnect.classList.remove('active');pageChat.classList.remove('hidden');pageConnect.classList.add('hidden');}
-tabConnect.onclick=showConnect; tabChat.onclick=()=>{ if(!tabChat.disabled) showChat(); };
-
-// ===== 主題/提示音/背景 =====
-const themeBtn=$('#themeBtn'), soundBtn=$('#soundBtn'), bgFileEl=$('#bgFile'), bgPhoto=$('#bgPhoto');
-let audioEnabled=false, ac=null; function ensureAC(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); }
-function beep(kind='msg'){ if(!audioEnabled) return; ensureAC(); const o=ac.createOscillator(), g=ac.createGain(); o.type='sine'; o.frequency.value=(kind==='connect')?880:(kind==='send'?660:520); g.gain.value=0.0001; o.connect(g); g.connect(ac.destination); const t=ac.currentTime; g.gain.exponentialRampToValueAtTime(0.04,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+0.15); o.start(); o.stop(t+0.16); }
-soundBtn.onclick=()=>{ audioEnabled=!audioEnabled; if(audioEnabled){ ensureAC(); beep('connect'); soundBtn.textContent='提示音：開'; } else soundBtn.textContent='提示音：關'; };
-(function(){ const saved=localStorage.getItem('sweet.theme')||'rose'; if(saved==='blue') document.body.classList.add('theme-blue'); })();
-function toggleTheme(){ document.body.classList.toggle('theme-blue'); const m=document.body.classList.contains('theme-blue')?'blue':'rose'; localStorage.setItem('sweet.theme',m); }
-themeBtn.onclick=toggleTheme; bgFileEl.onchange=()=>{ const f=bgFileEl.files?.[0]; if(!f) return; const url=URL.createObjectURL(f); bgPhoto.style.backgroundImage=`url(${url})`; };
-
-// ===== UI 工具 =====
-function setStatus(t,cls){ statusChip.textContent=t; statusChip.className='chip '+(cls||''); }
-function setTip(t){ tip.textContent='狀態：'+t; }
-function now(){ const d=new Date(); const p=n=>String(n).padStart(2,'0'); return `${p(d.getHours())}:${p(d.getMinutes())}`; }
-function esc(s){ return s.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-function addMsg(who,html){ const row=document.createElement('div'); row.className='msgrow '+who; const avatar=`<div class="avatar">${who==='me'?(nickEl.value||'我')[0]:'❤'}</div>`; const bubble=`<div><div class="bubble">${html}</div><div class="meta">${who==='me'?'我':'對方'} · ${now()}</div></div>`; row.innerHTML = who==='me'? `${bubble}${avatar}` : `${avatar}${bubble}`; logEl.appendChild(row); logEl.scrollTop=logEl.scrollHeight; }
-
-// ===== Toast =====
-const toastEl = document.getElementById('toast');
-function toast(msg,ms=1200){ toastEl.textContent=msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), ms); }
-
-// ===== 可靠的複製：Clipboard API → execCommand → prompt =====
-async function copyText(text){
-  // 1) 嘗試 Clipboard API（需 https + 使用者手勢 + 站點允許）
-  try{
-    if(navigator.clipboard && window.isSecureContext){
-      await navigator.clipboard.writeText(text);
-      toast('已複製 ID');
-      return true;
+(() => {
+'use strict';
+const CONFIG = {
+  version:'1.0',
+  saveKey:'strider-harmony-save-v1',
+  baseCrit:0.1,
+  critMult:1.5,
+  enCost:{attack:6,tune:8,shield:5,harmony:7},
+  enRegenShield:6,
+  harmonyCrit:0.35,
+  dissonanceChance:0.25,
+  shieldReduction:0.5,
+  logLimit:6,
+  upgradeInterval:2,
+  itemMax:8,
+  dropChance:0.75,
+  trueDamageStone:3,
+  baseItem:{'共鳴石':{desc:'下次普攻附加真實傷害 3。',type:'stone'},'節拍器':{desc:'2 回合內 ACC ↑15 並嘗試解除失調。',type:'metronome'},'靜音鈴':{desc:'解除殘響灼。',type:'silencer'},'清音露':{desc:'解除遲拍並回 EN。',type:'dew'}},
+  animationMs:280,
+  bossPhaseTrigger:0.5,
+  itemDropPool:['共鳴石','節拍器','靜音鈴','清音露'],
+  upgrades:[
+    {id:'atk1',label:'+6 ATK',effect:hero=>hero.atk+=6},
+    {id:'def1',label:'+5 DEF',effect:hero=>hero.def+=5},
+    {id:'acc1',label:'+8 ACC',effect:hero=>hero.acc+=8},
+    {id:'eva1',label:'+6 EVA',effect:hero=>hero.eva+=6},
+    {id:'shieldstart',label:'戰鬥開場獲護盾',effect:hero=>hero.traits.shieldStart=true},
+    {id:'surehit',label:'首擊必中一次',effect:hero=>hero.traits.firstSureHit=true},
+    {id:'critboost',label:'暴擊倍率 +0.2',effect:hero=>hero.traits.critBonus=(hero.traits.critBonus||0)+0.2},
+    {id:'regen',label:'每回合回 4 EN',effect:hero=>hero.traits.enRegen=(hero.traits.enRegen||0)+4}
+  ]
+};
+const DATA = {
+  areas:[
+    {id:'forest',name:'清音林',color:'#38bdf8',nodes:[
+      {type:'start'},
+      {type:'battle',enemyPool:['拍落鳥']},
+      {type:'event',effect:'heal'},
+      {type:'battle',enemyPool:['回聲影','低頻獸']},
+      {type:'rest'}
+    ]},
+    {id:'cave',name:'回響洞',color:'#a855f7',nodes:[
+      {type:'battle',enemyPool:['回聲影']},
+      {type:'event',effect:'echo'},
+      {type:'battle',enemyPool:['拍落鳥','低頻獸']},
+      {type:'battle',enemyPool:['狂想靈']}
+    ]},
+    {id:'plain',name:'交錯平原',color:'#f97316',nodes:[
+      {type:'battle',enemyPool:['拍落鳥','狂想靈']},
+      {type:'event',effect:'tempo'},
+      {type:'battle',enemyPool:['低頻獸','狂想靈']},
+      {type:'battle',enemyPool:['回聲影','拍落鳥']},
+      {type:'rest'}
+    ]},
+    {id:'spire',name:'共振峰',color:'#22d3ee',nodes:[
+      {type:'battle',enemyPool:['低頻獸','狂想靈']},
+      {type:'event',effect:'risk'},
+      {type:'battle',enemyPool:['拍落鳥','回聲影','狂想靈']},
+      {type:'battle',enemyPool:['低頻獸','狂想靈']}
+    ]},
+    {id:'hall',name:'和聲殿',color:'#f43f5e',nodes:[
+      {type:'battle',enemyPool:['拍落鳥','低頻獸','回聲影']},
+      {type:'event',effect:'final'},
+      {type:'battle',enemyPool:['狂想靈','低頻獸']},
+      {type:'boss'}
+    ]}
+  ],
+  enemies:{
+    '拍落鳥':{hp:70,en:40,atk:18,def:6,acc:70,eva:24,ai:'fast',color:'#38bdf8',passive:'高速襲擊，偶爾使玩家遲拍。'},
+    '回聲影':{hp:80,en:50,atk:16,def:8,acc:75,eva:18,ai:'echo',color:'#a855f7',passive:'受擊時 20% 回施失調。'},
+    '低頻獸':{hp:110,en:60,atk:14,def:16,acc:68,eva:12,ai:'low',color:'#f97316',passive:'厚重低頻，偶發殘響灼。'},
+    '狂想靈':{hp:85,en:55,atk:19,def:10,acc:72,eva:20,ai:'drain',color:'#22d3ee',passive:'回合開始偷取少量 EN。'},
+    '失調大師':{hp:220,en:120,atk:24,def:14,acc:80,eva:22,ai:'boss',color:'#f43f5e',passive:'堆疊失調，轉階後施放殘響波。'}
+  }
+};
+const UTIL = {
+  clamp:(v,min,max)=>Math.min(Math.max(v,min),max),
+  pick:(arr)=>arr[Math.floor(RNG.next()*arr.length)],
+  shuffle:(arr)=>{for(let i=arr.length-1;i>0;i--){const j=Math.floor(RNG.next()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;},
+  formatPercent:(v)=>Math.round(v*100)+'%'
+};
+const RNG = (()=>{
+  let seed = Date.now() % 2147483647;
+  function setSeed(s){ seed = s>>>0; }
+  function next(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+  function getSeed(){ return seed>>>0; }
+  return {setSeed,next,getSeed};
+})();
+const AudioFX = (()=>{
+  let enabled=false,ctx=null;
+  function ensure(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); }
+  function play(freq=440,duration=0.2,type='sine'){
+    if(!enabled) return;
+    ensure();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type=type; osc.frequency.value=freq;
+    gain.gain.value=0.0001;
+    osc.connect(gain); gain.connect(ctx.destination);
+    const now = ctx.currentTime;
+    gain.gain.exponentialRampToValueAtTime(0.08, now+0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now+duration);
+    osc.start();
+    osc.stop(now+duration+0.02);
+  }
+  return {
+    toggle(v){ enabled=v; if(enabled) ensure(); if(enabled) play(660,0.15,'triangle'); },
+    noteHit(){ play(540,0.18,'triangle'); },
+    noteMiss(){ play(220,0.18,'sawtooth'); },
+    noteBuff(){ play(760,0.2,'sine'); },
+    victory(){ play(880,0.4,'square'); }
+  };
+})();
+const Inventory = (()=>{
+  function create(){ return []; }
+  function add(inv,item){ if(inv.length>=CONFIG.itemMax) return false; inv.push({id:item,uses:1}); return true; }
+  function remove(inv,index){ inv.splice(index,1); }
+  return {create,add,remove};
+})();
+const Entity = (()=>{
+  function baseHero(id){
+    if(id==='li'){
+      return {id,name:'琴者·璃',hp:120,hpMax:120,en:70,enMax:70,atk:20,def:12,acc:78,eva:18,traits:{hero:'li',shieldStart:true,ultiCooldown:0},status:{},effects:{},cooldowns:{ult:0},flags:{opened:true},passive:"和聲護盾"};
     }
-  }catch(e){ /* 可能被 Permissions-Policy 擋住 */ }
-  // 2) 傳統備援：選取隱藏 textarea + execCommand
-  try{
-    const ta=document.createElement('textarea');
-    ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-1000px';
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    const ok=document.execCommand && document.execCommand('copy');
-    document.body.removeChild(ta);
-    if(ok){ toast('已複製 ID'); return true; }
-  }catch(e){ /* ignore */ }
-  // 3) 最終退路：顯示手動複製提示
-  window.prompt('無法自動複製，請手動複製此 ID：', text);
-  return false;
-}
-
-// 讓輸入框點一下全選，方便手動複製
-myIdEl.addEventListener('click',()=>{ myIdEl.select(); myIdEl.setSelectionRange(0, 99999); });
-
-// ===== PeerJS 載入與連線 =====
-const ICE_SERVERS=[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun.cloudflare.com:3478'] }];
-const PeerCDNs=['https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js','https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js','https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js'];
-function loadScriptSeq(urls){return new Promise((res,rej)=>{let i=0;const next=()=>{if(i>=urls.length) return rej();const s=document.createElement('script');s.src=urls[i++];s.async=true;s.onload=res;s.onerror=()=>{s.remove();next();};document.head.appendChild(s);};next();});}
-
-let peer=null, conn=null;
-(async()=>{try{await loadScriptSeq(PeerCDNs);}catch(e){ setStatus('信令失敗','warn'); setTip('CDN 無法載入，請換網路或稍後再試'); return; }
-  peer=new Peer({config:{iceServers:ICE_SERVERS}});
-  peer.on('open',id=>{ myIdEl.value=id; setStatus('就緒（待連線）','warn'); setTip('互換ID，貼上對方ID後按連線'); });
-  peer.on('connection',c=>{ if(conn){ c.close(); return; } conn=c; wireConn(); });
-  peer.on('error',e=>{ console.error(e); setStatus('錯誤','bad'); setTip(String(e)); });
+    return {id,name:'弦客·科',hp:130,hpMax:130,en:65,enMax:65,atk:24,def:10,acc:82,eva:16,traits:{hero:'ke',firstSureHit:true,ultiCooldown:0},status:{},effects:{},cooldowns:{ult:0},flags:{opened:true},passive:"首回命中提高"};
+  }
+  function cloneEnemy(key){
+    const src = DATA.enemies[key];
+    return {id:key,name:key,hp:src.hp,hpMax:src.hp,en:src.en,enMax:src.en,atk:src.atk,def:src.def,acc:src.acc,eva:src.eva,ai:src.ai,color:src.color,passive:src.passive,status:{},effects:{},phase:1};
+  }
+  function resetCombatant(entity){
+    entity.status={};
+    entity.effects={};
+    entity.cooldowns={ult:0};
+  }
+  return {baseHero,cloneEnemy,resetCombatant};
 })();
-
-function wireConn(){
-  setStatus('連線中…','warn'); setTip('建立 P2P');
-  conn.on('open',()=>{ setStatus('已連線','ok'); setTip('開始聊天吧！'); tabChat.disabled=false; showChat(); beep('connect'); });
-  conn.on('data',d=>{
-    if(d instanceof Blob || d instanceof ArrayBuffer){ const b=d instanceof Blob? d: new Blob([d]); const url=URL.createObjectURL(b); addMsg('you',`<img class=img src="${url}">`); beep('msg'); return; }
-    addMsg('you', esc(String(d)).replace(/♥/g,'💖')); beep('msg');
+const BattleSystem = (()=>{
+  const states = {idle:'idle',player:'player',enemy:'enemy',victory:'victory',defeat:'defeat'};
+  let battle=null;
+  function create(hero,enemy){
+    battle = {
+      hero:structuredClone(hero),
+      enemy:enemy,
+      turn:1,
+      state:states.player,
+      log:[],
+      heroBuff:{crit:0,nextSure:false,shield:0,stone:false},
+      guard:false,
+      tempoShift:0,
+      bossPhase:1,
+      stats:{selfRecoil:0}
+    };
+    Entity.resetCombatant(battle.hero);
+    Entity.resetCombatant(battle.enemy);
+    if(hero.traits.shieldStart) battle.heroBuff.shield=1;
+    if(hero.traits.firstSureHit) battle.heroBuff.nextSure=true;
+    if(hero.traits.hero==='ke') battle.hero.effects.firstTurnAim=true;
+    if(hero.traits.hero==='li') battle.heroBuff.shield = Math.max(battle.heroBuff.shield,1);
+    UI.updateLog([]);
+    UI.updateHero(battle.hero,battle.heroBuff);
+    UI.updateActions();
+    return battle;
+  }
+  function statusLabel(name,value){
+    const map={失調:'命中↓',殘響灼:'持續傷',遲拍:'延遲',過音:'反噬'};
+    return `${name}${value.turns?`(${value.turns})`:''}·${map[name]||''}`;
+  }
+  function calcHit(attacker,defender,temp){
+    let acc = attacker.acc + (attacker.effects?.acc||0) + (temp?.acc||0);
+    if(attacker.status['失調']) acc -= 18;
+    if(defender.status['遲拍']) acc += 12;
+    acc = Math.max(acc,10);
+    const eva = Math.max(defender.eva + (defender.effects?.eva||0),1);
+    let chance = acc/(acc+eva);
+    chance = UTIL.clamp(chance,0.2,0.95);
+    if(temp?.sure) chance=1;
+    if(attacker.effects?.firstTurnAim){ chance = Math.min(0.98,chance+0.12); attacker.effects.firstTurnAim=false; }
+    const roll = RNG.next();
+    return {hit:roll<chance, chance};
+  }
+  function calcDamage(attacker,defender,crit){
+    const variation = 0.85 + RNG.next()*0.3;
+    let dmg = attacker.atk * variation - defender.def;
+    dmg = Math.max(1,Math.round(dmg));
+    if(crit){ dmg = Math.round(dmg * (CONFIG.critMult + (attacker.traits?.critBonus||0))); }
+    return dmg;
+  }
+  function pushLog(msg){
+    battle.log.push(`[${battle.turn}] ${msg}`);
+    if(battle.log.length>CONFIG.logLimit) battle.log.shift();
+    UI.updateLog(battle.log);
+  }
+  function applyStatus(target,name,turns){
+    if(!target.status[name]) target.status[name]={turns};
+    else target.status[name].turns=Math.max(target.status[name].turns,turns);
+  }
+  function removeStatus(target,name){ delete target.status[name]; }
+  function spendEN(user,cost){
+    user.en = Math.max(0,user.en - cost);
+  }
+  function doHeroAction(action){
+    if(!battle||battle.state!==states.player) return;
+    const hero = battle.hero; const enemy = battle.enemy;
+    const mapActions = {
+      attack:()=>{
+        if(hero.en<CONFIG.enCost.attack){ pushLog('能量不足，無法基音打擊'); return false; }
+        spendEN(hero,CONFIG.enCost.attack);
+        const hit = calcHit(hero,enemy,{sure:battle.heroBuff.nextSure,acc:battle.tempoShift});
+        const critChance = CONFIG.baseCrit + (battle.heroBuff.crit||0);
+        const crit = hit.hit && RNG.next()<critChance;
+        if(!hit.hit){
+          pushLog('你揮出樂弓，但音波散去。');
+          AudioFX.noteMiss();
+        } else {
+          let dmg = calcDamage(hero,enemy,crit);
+          if(battle.heroBuff.stone){ dmg += CONFIG.trueDamageStone; battle.heroBuff.stone=false; }
+          enemy.hp = Math.max(0, enemy.hp - dmg);
+          pushLog(`基音打擊造成 ${dmg}${crit?' (暴擊)':''} 傷害。`);
+          AudioFX.noteHit();
+          if(enemy.id==='回聲影' && RNG.next()<0.2){ applyStatus(hero,'失調',{turns:2}); pushLog('回聲影回施失調！'); }
+          if(enemy.id==='低頻獸' && RNG.next()<0.2){ applyStatus(hero,'殘響灼',{turns:3}); pushLog('低頻獸低頻震顫造成殘響灼。'); }
+        }
+        battle.heroBuff.nextSure=false;
+        endHeroTurn();
+        return true;
+      },
+      tune:()=>{
+        if(hero.en<CONFIG.enCost.tune){ pushLog('能量不足，無法調律'); return false; }
+        spendEN(hero,CONFIG.enCost.tune);
+        hero.effects.acc = (hero.effects.acc||0)+15;
+        if(hero.status['失調'] && RNG.next()<0.5){ removeStatus(hero,'失調'); pushLog('疊拍成功，失調清除！'); }
+        else pushLog('你調整節拍，命中率提升。');
+        AudioFX.noteBuff();
+        endHeroTurn();
+        return true;
+      },
+      shield:()=>{
+        if(hero.en<CONFIG.enCost.shield){ pushLog('能量不足，無法護壁'); return false; }
+        spendEN(hero,CONFIG.enCost.shield);
+        battle.guard = true;
+        hero.en = Math.min(hero.enMax, hero.en + CONFIG.enRegenShield);
+        pushLog('節奏護壁減少下一次傷害，並回復能量。');
+        AudioFX.noteBuff();
+        endHeroTurn();
+        return true;
+      },
+      harmony:()=>{
+        if(hero.en<CONFIG.enCost.harmony){ pushLog('能量不足，無法擴散'); return false; }
+        spendEN(hero,CONFIG.enCost.harmony);
+        battle.heroBuff.crit = CONFIG.harmonyCrit;
+        if(RNG.next()<CONFIG.dissonanceChance){ applyStatus(enemy,'失調',{turns:2}); pushLog('和聲擴散使敵方失調！'); }
+        else pushLog('和聲擴散強化了暴擊機率。');
+        AudioFX.noteBuff();
+        endHeroTurn();
+        return true;
+      },
+      ultimate:()=>{
+        if(hero.cooldowns.ult>0){ pushLog('必殺尚在冷卻。'); return false; }
+        if(hero.traits.hero==='li'){
+          hero.cooldowns.ult=3;
+          hero.en = Math.min(hero.enMax, hero.en + 18);
+          ['失調','殘響灼','遲拍','過音'].forEach(s=>removeStatus(hero,s));
+          pushLog('溫柔分解洗去負面，能量舒緩湧現。');
+        } else {
+          hero.cooldowns.ult=3;
+          battle.heroBuff.nextSure=true;
+          battle.heroBuff.crit = 1;
+          pushLog('脈衝強擊蓄勢，下回合必中且暴擊！');
+        }
+        AudioFX.noteBuff();
+        endHeroTurn();
+        return true;
+      },
+      item:()=>{
+        UI.openInventoryModal();
+        return false;
+      }
+    };
+    const acted = mapActions[action]();
+    if(action!=='item' && acted) UI.updateHero(hero,battle.heroBuff);
+  }
+  function endHeroTurn(){
+    const hero = battle.hero;
+    const enemy = battle.enemy;
+    hero.cooldowns.ult = Math.max(0, hero.cooldowns.ult-1);
+    if(hero.traits.enRegen) hero.en = Math.min(hero.enMax, hero.en + hero.traits.enRegen);
+    battle.state = states.enemy;
+    tickStatus(hero);
+    UI.updateHero(hero,battle.heroBuff);
+    setTimeout(enemyTurn,CONFIG.animationMs);
+  }
+  function tickStatus(target){
+    Object.keys(target.status).forEach(key=>{
+      const obj = target.status[key];
+      if(obj.turns!==undefined){ obj.turns-=1; if(obj.turns<=0) delete target.status[key]; }
+    });
+  }
+  function enemyTurn(){
+    if(!battle) return;
+    const hero = battle.hero;
+    const enemy = battle.enemy;
+    if(enemy.hp<=0){ win(); return; }
+    if(hero.hp<=0){ lose(); return; }
+    if(enemy.id==='狂想靈'){ const steal=8; hero.en=Math.max(0,hero.en-steal); enemy.en=Math.min(enemy.enMax,enemy.en+steal); pushLog('狂想靈竊取了你的能量。'); }
+    if(enemy.id==='失調大師' && enemy.phase===1 && enemy.hp <= enemy.hpMax*CONFIG.bossPhaseTrigger){
+      enemy.phase=2; pushLog('失調大師狂笑，殘響湧動！'); applyStatus(hero,'殘響灼',3); }
+    let action='attack';
+    if(enemy.ai==='fast' && RNG.next()<0.35) action='delay';
+    if(enemy.ai==='echo' && RNG.next()<0.4) action='dissonance';
+    if(enemy.ai==='low' && RNG.next()<0.3) action='burn';
+    if(enemy.ai==='drain' && RNG.next()<0.5) action='over';
+    if(enemy.ai==='boss'){
+      if(enemy.phase===1){ action = RNG.next()<0.4?'dissonance':'attack'; }
+      else action = RNG.next()<0.6?'resonanceWave':'dissonance';
+    }
+    enemyAction(action);
+  }
+  function applyStatus(target,name,turns){
+    if(!target.status[name]) target.status[name]={turns};
+    else target.status[name].turns=Math.max(target.status[name].turns,turns);
+  }
+  function enemyAction(type){
+    const hero = battle.hero;
+    const enemy = battle.enemy;
+    const hit = () => calcHit(enemy,hero,{});
+    if(type==='attack'){
+      const result = hit();
+      if(!result.hit){ pushLog(`${enemy.name} 的音浪落空。`); }
+      else {
+        let dmg = calcDamage(enemy,hero,false);
+        if(battle.heroBuff.shield>0){
+          const block=12;
+          dmg=Math.max(0,dmg-block);
+          battle.heroBuff.shield--;
+          pushLog('和聲護盾吸收部分傷害。');
+        }
+        if(battle.guard){ dmg = Math.round(dmg*(1-CONFIG.shieldReduction)); battle.guard=false; }
+        hero.hp = Math.max(0, hero.hp-dmg);
+        pushLog(`${enemy.name} 造成 ${dmg} 傷害。`);
+      }
+    } else if(type==='delay'){
+      applyStatus(hero,'遲拍',2);
+      pushLog('拍落鳥拖慢了你的節拍。');
+    } else if(type==='dissonance'){
+      applyStatus(hero,'失調',3);
+      pushLog(`${enemy.name} 施加失調。`);
+    } else if(type==='burn'){
+      applyStatus(hero,'殘響灼',3);
+      pushLog('低頻獸的震動灼傷了你。');
+    } else if(type==='over'){
+      applyStatus(hero,'過音',2);
+      pushLog('狂想靈讓你陷入過音反噬。');
+    } else if(type==='resonanceWave'){
+      const dmg = Math.max(6,Math.round(enemy.atk*0.8));
+      hero.hp = Math.max(0, hero.hp-dmg);
+      applyStatus(hero,'殘響灼',3);
+      pushLog('失調大師釋放殘響波，造成 '+dmg+' 傷害並附帶灼燒！');
+    }
+    if(hero.status['殘響灼']){
+      hero.hp = Math.max(0, hero.hp-6);
+      pushLog('殘響灼灼燒造成 6 傷。');
+    }
+    if(hero.status['過音']){
+      hero.hp = Math.max(0, hero.hp-4);
+      battle.stats.selfRecoil +=1;
+      pushLog('過音反噬造成 4 傷。');
+    }
+    tickStatus(enemy);
+    tickStatus(hero);
+    battle.turn++;
+    battle.state = hero.hp>0?states.player:states.defeat;
+    battle.guard=false;
+    battle.heroBuff.crit = 0;
+    UI.updateHero(hero,battle.heroBuff);
+    UI.updateActions();
+    if(hero.hp<=0){ lose(); return; }
+    if(enemy.hp<=0){ win(); return; }
+    pushLog('輪到你行動。');
+  }
+  function win(){
+    battle.state=states.victory;
+    pushLog('你贏了！');
+    AudioFX.victory();
+    Game.onBattleWin(battle);
+  }
+  function lose(){
+    battle.state=states.defeat;
+    pushLog('旅程在此中斷……');
+    Game.onBattleLose();
+  }
+  function getBattle(){ return battle; }
+  function forceEnd(){ battle=null; }
+  return {create,doHeroAction,getBattle,forceEnd};
+})();
+const SceneMap = (()=>{
+  const canvas = document.getElementById('mapCanvas');
+  const ctx = canvas.getContext('2d');
+  let pulse=0;
+  function render(state){
+    const {areaIndex,nodeIndex} = state;
+    const area = DATA.areas[areaIndex];
+    const nodes = area.nodes;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='rgba(2,6,23,0.6)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const padding=40;
+    const availableW = canvas.width - padding*2;
+    const step = availableW / (nodes.length-1||1);
+    ctx.strokeStyle='rgba(148,163,184,0.4)';
+    ctx.lineWidth=4;
+    ctx.beginPath();
+    ctx.moveTo(padding, canvas.height/2);
+    for(let i=1;i<nodes.length;i++){
+      ctx.lineTo(padding+step*i, canvas.height/2);
+    }
+    ctx.stroke();
+    nodes.forEach((node,i)=>{
+      const x = padding + step*i;
+      const y = canvas.height/2;
+      const r = 20;
+      ctx.beginPath();
+      ctx.fillStyle = i===nodeIndex ? area.color : 'rgba(148,163,184,0.35)';
+      ctx.arc(x,y,r+(i===nodeIndex?4:0),0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle='#0f172a';
+      ctx.font='14px sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText(nodeLabel(node.type),x,y+32);
+    });
+    const charY = canvas.height/2;
+    const charX = padding + step*nodeIndex;
+    const size = 16 + Math.sin(pulse)*2;
+    ctx.fillStyle='#f8fafc';
+    ctx.beginPath();
+    ctx.arc(charX, charY - 36, size, 0, Math.PI*2);
+    ctx.fill();
+    pulse+=0.05;
+  }
+  function nodeLabel(type){
+    switch(type){
+      case 'battle':return '戰鬥';
+      case 'rest':return '休整';
+      case 'event':return '事件';
+      case 'boss':return 'Boss';
+      case 'start':return '起點';
+      default:return '';
+    }
+  }
+  return {render};
+})();
+const UI = (()=>{
+  const heroName = document.getElementById('heroName');
+  const hpValue = document.getElementById('hpValue');
+  const enValue = document.getElementById('enValue');
+  const atkValue = document.getElementById('atkValue');
+  const defValue = document.getElementById('defValue');
+  const accValue = document.getElementById('accValue');
+  const evaValue = document.getElementById('evaValue');
+  const hpBar = document.getElementById('hpBar');
+  const enBar = document.getElementById('enBar');
+  const statusTags = document.getElementById('statusTags');
+  const logBox = document.getElementById('logBox');
+  const inventoryEl = document.getElementById('inventory');
+  const turnInfo = document.getElementById('turnInfo');
+  const progressText = document.getElementById('progressText');
+  const modal = document.getElementById('modal');
+  const modalBox = document.getElementById('modalBox');
+  const toast = document.getElementById('toast');
+  function updateHero(hero,buffs){
+    if(!hero) return;
+    heroName.textContent = `${hero.name} — ${hero.passive}`;
+    hpValue.textContent = `${hero.hp}/${hero.hpMax}`;
+    enValue.textContent = `${hero.en}/${hero.enMax}`;
+    atkValue.textContent = hero.atk;
+    defValue.textContent = hero.def;
+    accValue.textContent = hero.acc + (hero.effects?.acc||0);
+    evaValue.textContent = hero.eva;
+    hpBar.style.width = UTIL.formatPercent(hero.hp/hero.hpMax);
+    enBar.style.width = UTIL.formatPercent(hero.en/hero.enMax);
+    statusTags.innerHTML='';
+    Object.entries(hero.status).forEach(([name,val])=>{
+      const tag=document.createElement('span');
+      let color='';
+      if(name==='失調') color='var(--yellow)';
+      else if(name==='殘響灼') color='var(--red)';
+      else if(name==='遲拍') color='var(--purple)';
+      else if(name==='過音') color='#f87171';
+      tag.style.backgroundColor = color?color+'33':'rgba(148,163,184,0.2)';
+      tag.textContent = `${name}${val.turns?`(${val.turns})`:''}`;
+      statusTags.appendChild(tag);
+    });
+    if(buffs?.shield){ const tag=document.createElement('span'); tag.style.backgroundColor='rgba(59,130,246,0.3)'; tag.textContent=`護盾(${buffs.shield})`; statusTags.appendChild(tag); }
+    if(buffs?.crit){ const tag=document.createElement('span'); tag.style.backgroundColor='rgba(56,189,248,0.25)'; tag.textContent='暴擊↑'; statusTags.appendChild(tag); }
+    if(buffs?.nextSure){ const tag=document.createElement('span'); tag.style.backgroundColor='rgba(94,234,212,0.2)'; tag.textContent='必中'; statusTags.appendChild(tag); }
+  }
+  function updateLog(log){
+    logBox.innerHTML='';
+    log.slice(-CONFIG.logLimit).forEach(line=>{
+      const div=document.createElement('div');
+      div.textContent=line;
+      logBox.appendChild(div);
+    });
+    logBox.scrollTop=logBox.scrollHeight;
+  }
+  function updateInventory(inv){
+    inventoryEl.innerHTML='';
+    if(inv.length===0){ const empty=document.createElement('div'); empty.className='slot empty'; empty.textContent='無道具'; inventoryEl.appendChild(empty); return; }
+    inv.forEach((item,i)=>{
+      const el=document.createElement('div');
+      el.className='slot';
+      el.textContent=`${item.id}`;
+      el.title=CONFIG.baseItem[item.id]?.desc||'';
+      el.onclick=()=>Game.useItem(i);
+      inventoryEl.appendChild(el);
+    });
+  }
+  function updateActions(){
+    const battle = BattleSystem.getBattle();
+    const active = battle && battle.state==='player';
+    document.querySelectorAll('.actions button').forEach(btn=>btn.disabled=!active);
+    if(battle){ turnInfo.textContent=`回合 ${battle.turn}`; }
+    else turnInfo.textContent='-';
+  }
+  function updateProgress(areaIndex,nodeIndex){
+    const area = DATA.areas[areaIndex];
+    progressText.textContent = `區域：${area.name} (${nodeIndex+1}/${area.nodes.length})`;
+  }
+  function openModal(html,buttons){
+    modal.style.display='flex';
+    modalBox.innerHTML=html;
+    const list=document.createElement('div');
+    list.className='choice-list';
+    buttons.forEach(btn=>{
+      const el=document.createElement('button');
+      el.textContent=btn.label;
+      el.onclick=()=>{ btn.onClick(); closeModal(); };
+      list.appendChild(el);
+    });
+    modalBox.appendChild(list);
+  }
+  function closeModal(){ modal.style.display='none'; }
+  function openInventoryModal(){
+    const inv = Game.state.inventory;
+    if(inv.length===0){ toastMsg('沒有可用道具'); return; }
+    openModal('<h3>選擇道具</h3>',inv.map((item,idx)=>({label:`${item.id}`,onClick:()=>Game.useItem(idx,true)})).concat([{label:'取消',onClick:()=>{}}]));
+  }
+  function toastMsg(msg){
+    toast.textContent=msg;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),1000);
+  }
+  return {updateHero,updateInventory,updateActions,updateLog,openInventoryModal,openModal,closeModal,updateProgress,toast:toastMsg};
+})();
+const Game = (()=>{
+  const heroSelect = document.getElementById('hero-select');
+  const confirmHero = document.getElementById('confirmHero');
+  let selectedHero=null;
+  const heroButtons=[...document.querySelectorAll('.hero-btn')];
+  heroButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      heroButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedHero = btn.dataset.hero;
+      confirmHero.disabled=false;
+    });
   });
-  conn.on('close',()=>{ setStatus('已斷線','bad'); setTip('連線已關閉'); });
-  conn.on('error',e=>{ setStatus('錯誤','bad'); setTip(String(e)); });
-}
-
-// === 按鈕事件 ===
-$('#copyId').addEventListener('click', ()=> copyText(myIdEl.value||''));
-$('#connectBtn').addEventListener('click', ()=>{ if(!peer){ alert('PeerJS 尚未就緒'); return; } const id=peerIdEl.value.trim(); if(!id){ alert('請輸入對方ID'); return; } if(conn) try{ conn.close(); }catch(_){} conn=peer.connect(id,{reliable:true}); wireConn(); });
-$('#sendBtn').addEventListener('click', sendText);
-msgEl?.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendText(); }});
-function sendText(){ const t=msgEl.value.trim(); if(!t) return; if(!conn||!conn.open){ alert('尚未連線'); return; } conn.send(t); addMsg('me', esc(t).replace(/♥/g,'💖')); beep('send'); msgEl.value=''; msgEl.focus(); }
-
-imgFileEl?.addEventListener('change', async()=>{ const f=imgFileEl.files?.[0]; if(!f) return; if(!conn||!conn.open){ alert('尚未連線'); imgFileEl.value=''; return; }
-  try{ const blob=await toJPEGBlob(f); conn.send(blob); const url=URL.createObjectURL(blob); addMsg('me',`<img class=img src="${url}">`); beep('send'); }
-  catch(e){ alert('圖片處理失敗：'+e); } imgFileEl.value='';
-});
-function toJPEGBlob(file,maxW=1600,maxH=1600,quality=0.85){ return new Promise((resolve,reject)=>{ const img=new Image(); const url=URL.createObjectURL(file); img.onload=()=>{ let w=img.width,h=img.height; const r=Math.min(1,maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h); c.toBlob(b=>{ URL.revokeObjectURL(url); resolve(b); },'image/jpeg',quality); }; img.onerror=reject; img.src = url; }); }
-
-// ===== 自我測試（不影響 UI） =====
-(function selfTests(){
-  console.group('Self tests');
-  const enc=esc('<>&'); console.assert(enc==='&lt;&gt;&amp;'||enc==='&lt;&gt;&amp;', 'esc() 應轉義成功', enc);
-  const t=now(); console.assert(/^\d{2}:\d{2}$/.test(t), 'now() 應回 HH:MM', t);
-  console.groupEnd();
+  confirmHero.addEventListener('click',()=>{
+    if(!selectedHero) return;
+    startNewGame(selectedHero);
+    heroSelect.style.display='none';
+    save();
+  });
+  function startNewGame(heroId){
+    const hero = Entity.baseHero(heroId);
+    state.hero = hero;
+    state.areaIndex=0;
+    state.nodeIndex=0;
+    state.inventory=Inventory.create();
+    state.scene='map';
+    state.currentEnemy=null;
+    state.battles=0;
+    state.upgradesTaken=[];
+    state.clearStats={wins:0,start:Date.now(),selfRecoil:0};
+    UI.updateHero(hero,{});
+    UI.updateInventory(state.inventory);
+    UI.updateProgress(state.areaIndex,state.nodeIndex);
+    RNG.setSeed(Date.now());
+    state.seed=RNG.getSeed();
+    UI.updateActions();
+  }
+  const state = {
+    hero:null,
+    inventory:Inventory.create(),
+    areaIndex:0,
+    nodeIndex:0,
+    scene:'init',
+    battles:0,
+    upgradesTaken:[],
+    currentEnemy:null,
+    clearStats:{wins:0,start:Date.now(),selfRecoil:0},
+    seed:RNG.getSeed()
+  };
+  function save(){
+    const data = {
+      hero:state.hero,
+      inventory:state.inventory,
+      areaIndex:state.areaIndex,
+      nodeIndex:state.nodeIndex,
+      battles:state.battles,
+      upgradesTaken:state.upgradesTaken,
+      clearStats:state.clearStats,
+      scene:state.scene,
+      seed:RNG.getSeed()
+    };
+    if(state.scene==='battle'){
+      data.scene='map';
+    }
+    localStorage.setItem(CONFIG.saveKey,JSON.stringify(data));
+  }
+  function load(){
+    const raw = localStorage.getItem(CONFIG.saveKey);
+    if(!raw) return false;
+    try{
+      const data = JSON.parse(raw);
+      Object.assign(state,data);
+      if(state.scene==='battle'){ state.scene='map'; state.currentEnemy=null; }
+      RNG.setSeed(state.seed||Date.now());
+      if(state.hero){
+        heroSelect.style.display='none';
+        UI.updateHero(state.hero,{});
+        UI.updateInventory(state.inventory||[]);
+        UI.updateProgress(state.areaIndex,state.nodeIndex);
+        if(state.scene==='battle' && state.currentEnemy){ resumeBattle(); }
+      } else {
+        state.scene='init';
+        UI.updateInventory(state.inventory||[]);
+      }
+      UI.updateActions();
+      return true;
+    }catch(e){ console.error('載入失敗',e); return false; }
+  }
+  function resumeBattle(){
+    if(!state.currentEnemy) return;
+    const battle = BattleSystem.create(state.hero,state.currentEnemy);
+    UI.updateLog(battle.log);
+    UI.updateActions();
+  }
+  function move(dir){
+    if(state.scene!=='map') return;
+    const area = DATA.areas[state.areaIndex];
+    let newIndex = state.nodeIndex;
+    if(dir>0 && newIndex<area.nodes.length-1) newIndex++;
+    else if(dir<0 && newIndex>0) newIndex--;
+    if(newIndex!==state.nodeIndex){
+      state.nodeIndex=newIndex;
+      UI.updateProgress(state.areaIndex,state.nodeIndex);
+      handleNode(area.nodes[newIndex]);
+      save();
+    }
+  }
+  function handleNode(node){
+    if(node.type==='battle'){ startBattle(UTIL.pick(node.enemyPool)); }
+    else if(node.type==='boss'){ startBattle('失調大師'); }
+    else if(node.type==='rest'){ state.hero.hp=Math.min(state.hero.hpMax,state.hero.hp+30); state.hero.en=Math.min(state.hero.enMax,state.hero.en+20); UI.updateHero(state.hero,{}); UI.toast('短暫休息恢復。'); }
+    else if(node.type==='event'){ resolveEvent(node.effect); }
+  }
+  function resolveEvent(effect){
+    if(effect==='heal'){ state.hero.hp=Math.min(state.hero.hpMax,state.hero.hp+25); UI.toast('清音拂面，回復精神。'); }
+    if(effect==='echo'){ state.hero.en=Math.min(state.hero.enMax,state.hero.en+10); state.hero.status['失調']={turns:1}; UI.toast('洞壁回音帶來靈感與干擾。'); }
+    if(effect==='tempo'){ state.hero.effects.acc=(state.hero.effects.acc||0)+10; UI.toast('節奏變速，命中暫升。'); }
+    if(effect==='risk'){ if(RNG.next()<0.5){ state.hero.atk+=6; UI.toast('共振增幅，攻擊提升！'); } else { state.hero.status['過音']={turns:2}; UI.toast('共振失控，你受到了過音。'); } }
+    if(effect==='final'){ state.hero.en=Math.min(state.hero.enMax,state.hero.en+30); UI.toast('殿堂前你整備能量。'); }
+    UI.updateHero(state.hero,{});
+  }
+  function startBattle(enemyKey){
+    const enemy = Entity.cloneEnemy(enemyKey);
+    state.scene='battle';
+    state.currentEnemy=enemy;
+    const battle = BattleSystem.create(state.hero,enemy);
+    UI.updateHero(battle.hero,battle.heroBuff);
+    UI.updateLog([]);
+    UI.updateActions();
+  }
+  function onBattleWin(battle){
+    state.hero = battle.hero;
+    state.hero.status = battle.hero.status;
+    state.hero.effects = battle.hero.effects;
+    state.hero.cooldowns = battle.hero.cooldowns;
+    state.clearStats.selfRecoil += battle.stats.selfRecoil;
+    state.scene='map';
+    state.battles+=1;
+    state.clearStats.wins+=1;
+    state.currentEnemy=null;
+    maybeDrop();
+    advanceIfNeeded();
+    if(isGameClear()) showEnding();
+    else if(state.battles % CONFIG.upgradeInterval===0) presentUpgrade();
+    UI.updateHero(state.hero,{});
+    UI.updateActions();
+    save();
+  }
+  function maybeDrop(){
+    if(RNG.next()>CONFIG.dropChance) return;
+    const item = UTIL.pick(CONFIG.itemDropPool);
+    if(Inventory.add(state.inventory,item)) UI.toast(`獲得 ${item}`);
+    else UI.toast('背包已滿，無法拾取');
+    UI.updateInventory(state.inventory);
+  }
+  function presentUpgrade(){
+    const choices = UTIL.shuffle(CONFIG.upgrades.slice()).slice(0,3);
+    UI.openModal('<h3>升級選擇</h3>',choices.map(opt=>({label:opt.label,onClick:()=>{ opt.effect(state.hero); state.upgradesTaken.push(opt.id); UI.updateHero(state.hero,{}); save(); }})));
+  }
+  function advanceIfNeeded(){
+    const area = DATA.areas[state.areaIndex];
+    if(state.nodeIndex===area.nodes.length-1){
+      if(state.areaIndex < DATA.areas.length-1){
+        state.areaIndex+=1;
+        state.nodeIndex=0;
+        UI.toast(`抵達 ${DATA.areas[state.areaIndex].name}`);
+      }
+      UI.updateProgress(state.areaIndex,state.nodeIndex);
+    }
+  }
+  function isGameClear(){
+    return state.areaIndex===DATA.areas.length-1 && state.nodeIndex===DATA.areas[state.areaIndex].nodes.length-1 && !state.currentEnemy;
+  }
+  function showEnding(){
+    const elapsed = Math.round((Date.now()-state.clearStats.start)/1000);
+    const summary = `<h3>和聲復歸</h3><p>總時間：${elapsed}s<br>擊敗數：${state.clearStats.wins}<br>最高連勝：${state.clearStats.wins}<br>過音反噬次數：${state.clearStats.selfRecoil}</p>`;
+    UI.openModal(summary,[{label:'重新開始',onClick:()=>restart()}]);
+  }
+  function onBattleLose(){
+    state.scene='defeat';
+    state.currentEnemy=null;
+    UI.updateActions();
+    UI.openModal('<h3>旅程暫告段落</h3><p>是否重新開始？</p>',[
+      {label:'重新開始',onClick:()=>restart()},
+      {label:'回到地圖',onClick:()=>{ state.scene='map'; state.hero.hp=Math.max(1,Math.round(state.hero.hpMax*0.4)); state.hero.en=Math.max(0,Math.round(state.hero.enMax*0.5)); UI.updateHero(state.hero,{}); save(); }}
+    ]);
+  }
+  function useItem(index,fromModal){
+    if(state.scene!=='battle') return;
+    const battle = BattleSystem.getBattle();
+    if(!battle) return;
+    const item = state.inventory[index];
+    if(!item) return;
+    const hero = battle.hero;
+    if(item.id==='共鳴石'){ battle.heroBuff.stone=true; UI.toast('共鳴石注入，下次普攻附加真傷。'); }
+    if(item.id==='節拍器'){ hero.effects.acc=(hero.effects.acc||0)+15; if(hero.status['失調']) delete hero.status['失調']; UI.toast('節拍穩定，命中提升。'); }
+    if(item.id==='靜音鈴'){ delete hero.status['殘響灼']; UI.toast('靜音鈴響，灼燒解除。'); }
+    if(item.id==='清音露'){ delete hero.status['遲拍']; hero.en=Math.min(hero.enMax,hero.en+12); UI.toast('清音露恢復能量。'); }
+    Inventory.remove(state.inventory,index);
+    UI.updateInventory(state.inventory);
+    UI.updateHero(hero,battle.heroBuff);
+    UI.updateActions();
+    if(fromModal) UI.closeModal();
+    save();
+  }
+  function restart(){
+    localStorage.removeItem(CONFIG.saveKey);
+    window.location.reload();
+  }
+  function update(){
+    SceneMap.render(state);
+  }
+  function input(action){
+    if(state.scene==='init' && selectedHero && action==='confirm'){ confirmHero.click(); return; }
+    if(state.scene==='map'){
+      if(action==='right') move(1);
+      if(action==='left') move(-1);
+      if(action==='confirm'){
+        handleNode(DATA.areas[state.areaIndex].nodes[state.nodeIndex]);
+        save();
+      }
+    }
+  }
+  function battleAction(index){
+    const map=['attack','tune','shield','harmony','ultimate','item'];
+    BattleSystem.doHeroAction(map[index]);
+    save();
+  }
+  return {state,update,input,battleAction,useItem,onBattleWin,onBattleLose,move,startNewGame,save,load,restart};
 })();
-
-// 記住暱稱
-(function(){ const saved = localStorage.getItem('lc.nick'); if(saved) nickEl.value=saved; nickEl.addEventListener('change', ()=> localStorage.setItem('lc.nick', nickEl.value)); })();
+const Controls = (()=>{
+  const mapping = {
+    'Digit1':0,'Digit2':1,'Digit3':2,'Digit4':3,'Digit5':4,'Digit6':5,
+    'Key1':0,'Key2':1,'Key3':2,'Key4':3,'Key5':4,'Key6':5,
+    'Space':'confirm','Enter':'confirm',
+    'KeyW':'up','ArrowUp':'up',
+    'KeyS':'down','ArrowDown':'down',
+    'KeyA':'left','ArrowLeft':'left',
+    'KeyD':'right','ArrowRight':'right'
+  };
+  window.addEventListener('keydown',e=>{
+    const map = mapping[e.code] ?? mapping[e.key];
+    if(map===undefined) return;
+    e.preventDefault();
+    if(typeof map==='number') Game.battleAction(map);
+    else if(map==='confirm') Game.input('confirm');
+    else if(map==='left') Game.move(-1);
+    else if(map==='right') Game.move(1);
+  });
+  document.querySelectorAll('#virtual-pad [data-key]').forEach(btn=>{
+    const handle=()=>{
+      const key=btn.dataset.key;
+      if(key==='Space') Game.input('confirm');
+      if(key==='ArrowLeft') Game.move(-1);
+      if(key==='ArrowRight') Game.move(1);
+      if(key==='ArrowUp') Game.move(-1);
+      if(key==='ArrowDown') Game.move(1);
+    };
+    btn.addEventListener('touchstart',e=>{e.preventDefault();handle();});
+    btn.addEventListener('click',handle);
+  });
+})();
+const UIActions = (()=>{
+  document.getElementById('soundToggle').addEventListener('click',function(){
+    const turnOn = this.textContent.includes('關');
+    AudioFX.toggle(turnOn);
+    this.textContent='音效：'+(turnOn?'開':'關');
+  });
+  document.getElementById('motionToggle').addEventListener('click',function(){
+    const reduced = document.body.classList.toggle('reduce-motion');
+    this.textContent='動效：'+(reduced?'關':'開');
+  });
+  document.getElementById('restartBtn').addEventListener('click',()=>Game.restart());
+  document.getElementById('downloadSave').addEventListener('click',()=>{
+    const data = localStorage.getItem(CONFIG.saveKey);
+    if(!data){ UI.toast('沒有存檔'); return; }
+    const blob = new Blob([data],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download='harmony_save.json';
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); },0);
+  });
+  document.getElementById('uploadSave').addEventListener('change',e=>{
+    const file = e.target.files?.[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload=evt=>{
+      try{
+        localStorage.setItem(CONFIG.saveKey,evt.target.result);
+        UI.toast('存檔已載入，重新整理中');
+        setTimeout(()=>window.location.reload(),600);
+      }catch(err){
+        console.error(err);
+        UI.toast('存檔解析失敗');
+      }
+    };
+    reader.readAsText(file);
+  });
+  ['action1','action2','action3','action4','action5','action6'].forEach((id,idx)=>{
+    const btn=document.getElementById(id);
+    btn.addEventListener('click',()=>Game.battleAction(idx));
+  });
+  document.querySelectorAll('.actions button').forEach(btn=>btn.disabled=true);
+})();
+function gameLoop(){
+  Game.update();
+  requestAnimationFrame(gameLoop);
+}
+if(!Game.load()){
+  RNG.setSeed(Date.now());
+}
+UI.updateInventory(Game.state.inventory);
+UI.updateHero(Game.state.hero,{});
+requestAnimationFrame(gameLoop);
+})();
 </script>
 </body>
 </html>
