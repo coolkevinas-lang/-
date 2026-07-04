@@ -1,0 +1,41 @@
+name: Publish CO CO SELECT V6 page
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/restore-coco-select.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download full embedded HTML
+        run: |
+          set -euo pipefail
+          mkdir -p coco-select
+          curl -L --fail --silent --show-error "https://litter.catbox.moe/i3a0fp.html" -o coco-select/index.html
+          echo "0856359b2c464937ceadd1bf82fc9d3dff1a5b427e6a352641651729e57e679b  coco-select/index.html" | sha256sum -c -
+          test "$(grep -o 'data:image/' coco-select/index.html | wc -l)" -eq 30
+          rm -f .github/workflows/restore-coco-select.yml
+
+      - name: Commit updated page
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add coco-select/index.html .github/workflows/restore-coco-select.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "update CO CO SELECT visual editorial page"
+            git push
+          fi
