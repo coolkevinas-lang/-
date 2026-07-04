@@ -1,0 +1,11 @@
+{
+  "name": "CO CO SELECT",
+  "short_name": "CO CO SELECT",
+  "description": "Curated beauty, skincare, lingerie and jewelry selections designed to help people choose with more confidence.",
+  "start_url": "/-/coco-select/",
+  "scope": "/-/coco-select/",
+  "display": "standalone",
+  "lang": "zh-Hant",
+  "theme_color": "#f5efe1",
+  "background_color": "#f5efe1"
+}
