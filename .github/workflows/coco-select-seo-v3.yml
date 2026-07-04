@@ -1,0 +1,43 @@
+name: CO CO SELECT SEO V3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "coco-select/tools/build_seo_v3.py"
+      - ".github/workflows/coco-select-seo-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-static-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build SEO V3
+        run: python coco-select/tools/build_seo_v3.py
+
+      - name: Commit generated static SEO pages
+        shell: bash
+        run: |
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "No generated changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add coco-select/index.html coco-select/products coco-select/en/products coco-select/assets coco-select/sitemap.xml coco-select/SEARCH_CONSOLE_READY.md robots.txt
+          git add -u coco-select/assets coco-select/products coco-select/en/products
+          git commit -m "feat(seo): publish static global SEO V3 [skip ci]"
+          git push
